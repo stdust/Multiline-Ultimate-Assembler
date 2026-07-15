@@ -2,7 +2,7 @@
 
 This is a modified version of the original **[Multiline Ultimate Assembler](https://github.com/m417z/Multiline-Ultimate-Assembler)** (by RaMMicHaeL / m417z) plugin for **x64dbg** and **OllyDbg**. 
 
-It resolves several long-standing usability issues, including Korean IME (Input Method Editor) input bugs, hotkey overlaps, and focus-related text selection problems.
+It resolves several long-standing usability issues, including Korean IME (Input Method Editor) input bugs and syntax highlighting improvements.
 
 ---
 
@@ -12,22 +12,7 @@ It resolves several long-standing usability issues, including Korean IME (Input 
 * **Before:** Writing Korean letters in the Scintilla assembler editor caused character corruption, combination overlaps, or skipped keystrokes.
 * **After:** Fixed internal Windows IME message processing so that **Korean letters combine and display smoothly** without any input delays or skips.
 
-### 2. Hotkey Overlaps & Unbinding
-* **Before:** `Ctrl+M` and other keys conflicted with default Scintilla configurations, inserting unwanted Carriage Returns (newlines) into the code.
-* **After:** Reorganized and swapped the plugin hotkeys for maximum ergonomics:
-  * **`Ctrl + M`**: Shows the assembler dialog and moves focus to the editor.
-  * **`Ctrl + Shift + M`**: Loads the selected disassembly block from the debugger into the editor window.
-  * Cleared internal Scintilla keybindings (`SCI_CLEARCMDKEY`) for these keys to prevent unwanted formatting leaks.
-
-### 3. Physical Shift Key Double-Verification
-* **Before:** Checking the Shift modifier relied only on logical key states, occasionally resulting in missed or wrong hotkey actions.
-* **After:** Integrated `GetAsyncKeyState(VK_SHIFT)` for physical double-verification, making shift key behavior 100% reliable.
-
-### 4. Text Selection Collapse on Focus Transfer
-* **Before:** If you highlighted a block in the disassembly window and switched to the editor window using `Ctrl+M`, Scintilla interpreted the held-down Ctrl key as a "Ctrl+Drag selection" action and automatically selected undesired blocks of text.
-* **After:** Added immediate and asynchronous selection-clearing logic (`SCI_SETSEL`) using `PostMessage(UWM_COLLAPSE_SEL)` upon window activation. **The caret cursor stands clean at its position without visual bugs.**
-
-### 5. Modern Code Fonts & Enhanced Syntax Highlighting
+### 2. Modern Code Fonts & Enhanced Syntax Highlighting
 * **Before:** Courier-based tiny default fonts caused straining in high-DPI environments, with a basic single-color syntax styling.
 * **After:** Updated default layouts with clean, **resizable fixed-width monospace fonts** and customized assembly syntax coloring:
   * **`JMP` family**: Distinctive custom style (`SCE_ASM_JMP`) for branch controls.
