@@ -1,0 +1,847 @@
+ multiasm_x64dbg
+
+ Timestamp is 6a572ef1 (Wed Jul 15 15:55:45 2026)
+
+ Preferred load address is 0000000180000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 000002a0H .text                   CODE
+ 0001:000002a0 00011540H .text$mn                CODE
+ 0001:000117e0 00000030H .text$mn$00             CODE
+ 0002:00000000 00000540H .idata$5                DATA
+ 0002:00000540 00000010H .00cfg                  DATA
+ 0002:00000548 00000000H .gfids$y                DATA
+ 0002:00000550 00004ab0H .rdata                  DATA
+ 0002:00005000 00000000H .rdata$CastGuardVftablesA DATA
+ 0002:00005000 00000000H .rdata$CastGuardVftablesC DATA
+ 0002:00005000 00000054H .rdata$voltmd           DATA
+ 0002:00005054 0000020cH .rdata$zzzdbg           DATA
+ 0002:00005260 00000c50H .xdata                  DATA
+ 0002:00005eb0 00000020H .didat$2                DATA
+ 0002:00005ed0 00000020H .didat$3                DATA
+ 0002:00005ef0 00000018H .didat$4                DATA
+ 0002:00005f08 00000018H .didat$6                DATA
+ 0002:00005f20 00000120H .didat$7                DATA
+ 0002:00006040 000000bcH .edata                  DATA
+ 0002:000060fc 000000a0H .idata$2                DATA
+ 0002:0000619c 00000014H .idata$3                DATA
+ 0002:000061b0 00000540H .idata$4                DATA
+ 0002:000066f0 00000b26H .idata$6                DATA
+ 0003:00000000 00000158H .data                   DATA
+ 0003:00000158 00000028H .didat$5                DATA
+ 0003:00000180 0000069cH .bss                    DATA
+ 0004:00000000 000007c8H .pdata                  DATA
+ 0005:00000000 00000260H .rsrc$01                DATA
+ 0005:00000260 00004928H .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base               Lib:Object
+
+ 0000:00000000       __AbsoluteZero             0000000000000000     <absolute>
+ 0000:00000000       __arm64x_extra_rfe_table   0000000000000000     <absolute>
+ 0000:00000000       __arm64x_extra_rfe_table_size 0000000000000000     <absolute>
+ 0000:00000000       __arm64x_native_entrypoint 0000000000000000     <absolute>
+ 0000:00000000       __arm64x_redirection_metadata 0000000000000000     <absolute>
+ 0000:00000000       __arm64x_redirection_metadata_count 0000000000000000     <absolute>
+ 0000:00000000       __dynamic_value_reloc_table 0000000000000000     <absolute>
+ 0000:00000000       __enclave_config           0000000000000000     <absolute>
+ 0000:00000000       __guard_check_icall_a64n_fptr 0000000000000000     <absolute>
+ 0000:00000000       __guard_eh_cont_count      0000000000000000     <absolute>
+ 0000:00000000       __guard_eh_cont_table      0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_count         0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_table         0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_count          0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_table          0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_count      0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_table      0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_delayload_iat 0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_delayload_iat_copy 0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_iat     0000000000000000     <absolute>
+ 0000:00000000       __hybrid_auxiliary_iat_copy 0000000000000000     <absolute>
+ 0000:00000000       __hybrid_code_map          0000000000000000     <absolute>
+ 0000:00000000       __hybrid_code_map_count    0000000000000000     <absolute>
+ 0000:00000000       __hybrid_image_info_bitfield 0000000000000000     <absolute>
+ 0000:00000000       __x64_code_ranges_to_entry_points 0000000000000000     <absolute>
+ 0000:00000000       __x64_code_ranges_to_entry_points_count 0000000000000000     <absolute>
+ 0000:00000100       __guard_flags              0000000000000100     <absolute>
+ 0000:00000000       __ImageBase                0000000180000000     <linker-defined>
+ 0001:00000000       strstr                     0000000180001000 f   minicrt64:string.obj
+ 0001:00000058       strtoul                    0000000180001058 f   minicrt64:string.obj
+ 0001:00000204       strrchr                    0000000180001204 f   minicrt64:strrchr.obj
+ 0001:0000022c       memcmp                     000000018000122c f   minicrt64:memory.obj
+ 0001:00000250       memcpy                     0000000180001250 f   minicrt64:memory.obj
+ 0001:00000270       memset                     0000000180001270 f   minicrt64:memory.obj
+ 0001:00000f30       AssemblerShowDlg           0000000180001f30 f   assembler_dlg.obj
+ 0001:000010a0       AssemblerCloseDlg          00000001800020a0 f   assembler_dlg.obj
+ 0001:00005220       InitTabs                   0000000180006220 f   assembler_dlg_tabs.obj
+ 0001:000055b0       InitLoadTabs               00000001800065b0 f   assembler_dlg_tabs.obj
+ 0001:000058b0       SyncTabs                   00000001800068b0 f   assembler_dlg_tabs.obj
+ 0001:00005e80       NewTab                     0000000180006e80 f   assembler_dlg_tabs.obj
+ 0001:00006290       CloseTabByIndex            0000000180007290 f   assembler_dlg_tabs.obj
+ 0001:000065c0       OnTabChanged               00000001800075c0 f   assembler_dlg_tabs.obj
+ 0001:00006680       TabRenameEnd               0000000180007680 f   assembler_dlg_tabs.obj
+ 0001:00006980       LoadFileOfTab              0000000180007980 f   assembler_dlg_tabs.obj
+ 0001:00006bf0       SaveFileOfTab              0000000180007bf0 f   assembler_dlg_tabs.obj
+ 0001:00006e90       LoadFileFromLibrary        0000000180007e90 f   assembler_dlg_tabs.obj
+ 0001:00007600       DllMain                    0000000180008600 f   main_common.obj
+ 0001:00007630       PluginInit                 0000000180008630 f   main_common.obj
+ 0001:000084d0       AboutMessageBoxCallback    00000001800094d0 f   main_common.obj
+ 0001:00008530       plugsetup                  0000000180009530 f   main_x64dbg.obj
+ 0001:000086b0       pluginit                   00000001800096b0 f   main_x64dbg.obj
+ 0001:000087e0       plugstop                   00000001800097e0 f   main_x64dbg.obj
+ 0001:00008880       CBWINEVENT                 0000000180009880 f   main_x64dbg.obj
+ 0001:00008a30       CBMENUENTRY                0000000180009a30 f   main_x64dbg.obj
+ 0001:00008dc0       ShowOptionsDlg             0000000180009dc0 f   options_dlg.obj
+ 0001:00009e10       MyWriteinttoini            000000018000ae10 f   plugin_x64dbg.obj
+ 0001:00009ee0       MyGetColorfromini          000000018000aee0 f   plugin_x64dbg.obj
+ 0001:0000a000       ReadAsm                    000000018000b000 f   read_asm.obj
+ 0001:0000ca50       WriteAsm                   000000018000da50 f   write_asm.obj
+ 0001:00010f29       __tailMerge_comctl32_dll   0000000180011f29     comctl32:COMCTL32.dll
+ 0001:00010fa2       __imp_load_InitCommonControlsEx 0000000180011fa2 f   comctl32:COMCTL32.dll
+ 0001:00010fae       __imp_load_TaskDialogIndirect 0000000180011fae f   comctl32:COMCTL32.dll
+ 0001:000110a8       ?DloadAcquireSectionWriteAccess@@YAXXZ 00000001800120a8 f i delayimp:delayhlp.obj
+ 0001:00011164       ?DloadGetSRWLockFunctionPointers@@YAEXZ 0000000180012164 f i delayimp:delayhlp.obj
+ 0001:00011204       ?DloadMakePermanentImageCommit@@YAXPEAX_K@Z 0000000180012204 f i delayimp:delayhlp.obj
+ 0001:0001129c       ?DloadObtainSection@@YAPEAXPEAK0@Z 000000018001229c f i delayimp:delayhlp.obj
+ 0001:00011338       ?DloadProtectSection@@YAXPEAX_KKPEAK@Z 0000000180012338 f i delayimp:delayhlp.obj
+ 0001:00011430       ?DloadReleaseSectionWriteAccess@@YAXXZ 0000000180012430 f i delayimp:delayhlp.obj
+ 0001:000114dc       __delayLoadHelper2         00000001800124dc f   delayimp:delayhlp.obj
+ 0001:000117f0       _guard_dispatch_icall_nop  00000001800127f0 f   odbccp32:guard_dispatch.obj
+ 0002:00000000       __imp_ChooseColorA         0000000180013000     comdlg32:COMDLG32.dll
+ 0002:00000008       __imp_ChooseFontA          0000000180013008     comdlg32:COMDLG32.dll
+ 0002:00000010       __imp_FindTextA            0000000180013010     comdlg32:COMDLG32.dll
+ 0002:00000018       __imp_ReplaceTextA         0000000180013018     comdlg32:COMDLG32.dll
+ 0002:00000020       __imp_GetOpenFileNameA     0000000180013020     comdlg32:COMDLG32.dll
+ 0002:00000028       __imp_CommDlgExtendedError 0000000180013028     comdlg32:COMDLG32.dll
+ 0002:00000030       __imp_GetSaveFileNameA     0000000180013030     comdlg32:COMDLG32.dll
+ 0002:00000038       \177COMDLG32_NULL_THUNK_DATA 0000000180013038     comdlg32:COMDLG32.dll
+ 0002:00000040       __imp_DeleteObject         0000000180013040     gdi32:GDI32.dll
+ 0002:00000048       __imp_GetDeviceCaps        0000000180013048     gdi32:GDI32.dll
+ 0002:00000050       \177GDI32_NULL_THUNK_DATA  0000000180013050     gdi32:GDI32.dll
+ 0002:00000058       __imp_GetCurrentThreadId   0000000180013058     kernel32:KERNEL32.dll
+ 0002:00000060       __imp_RaiseException       0000000180013060     kernel32:KERNEL32.dll
+ 0002:00000068       __imp_GetSystemInfo        0000000180013068     kernel32:KERNEL32.dll
+ 0002:00000070       __imp_VirtualQuery         0000000180013070     kernel32:KERNEL32.dll
+ 0002:00000078       __imp_GetModuleHandleW     0000000180013078     kernel32:KERNEL32.dll
+ 0002:00000080       __imp_GetTickCount         0000000180013080     kernel32:KERNEL32.dll
+ 0002:00000088       __imp_HeapReAlloc          0000000180013088     kernel32:KERNEL32.dll
+ 0002:00000090       __imp_GetProcAddress       0000000180013090     kernel32:KERNEL32.dll
+ 0002:00000098       __imp_LoadLibraryExA       0000000180013098     kernel32:KERNEL32.dll
+ 0002:000000a0       __imp_VirtualProtect       00000001800130a0     kernel32:KERNEL32.dll
+ 0002:000000a8       __imp_MulDiv               00000001800130a8     kernel32:KERNEL32.dll
+ 0002:000000b0       __imp_GetLastError         00000001800130b0     kernel32:KERNEL32.dll
+ 0002:000000b8       __imp_LockResource         00000001800130b8     kernel32:KERNEL32.dll
+ 0002:000000c0       __imp_SizeofResource       00000001800130c0     kernel32:KERNEL32.dll
+ 0002:000000c8       __imp_LoadResource         00000001800130c8     kernel32:KERNEL32.dll
+ 0002:000000d0       __imp_HeapAlloc            00000001800130d0     kernel32:KERNEL32.dll
+ 0002:000000d8       __imp_GetProcessHeap       00000001800130d8     kernel32:KERNEL32.dll
+ 0002:000000e0       __imp_lstrcpynA            00000001800130e0     kernel32:KERNEL32.dll
+ 0002:000000e8       __imp_HeapFree             00000001800130e8     kernel32:KERNEL32.dll
+ 0002:000000f0       __imp_MultiByteToWideChar  00000001800130f0     kernel32:KERNEL32.dll
+ 0002:000000f8       __imp_WideCharToMultiByte  00000001800130f8     kernel32:KERNEL32.dll
+ 0002:00000100       __imp_lstrcpyA             0000000180013100     kernel32:KERNEL32.dll
+ 0002:00000108       __imp_GetTempPathA         0000000180013108     kernel32:KERNEL32.dll
+ 0002:00000110       __imp_lstrcatA             0000000180013110     kernel32:KERNEL32.dll
+ 0002:00000118       __imp_lstrlenA             0000000180013118     kernel32:KERNEL32.dll
+ 0002:00000120       __imp_GetFileAttributesA   0000000180013120     kernel32:KERNEL32.dll
+ 0002:00000128       __imp_DeleteFileA          0000000180013128     kernel32:KERNEL32.dll
+ 0002:00000130       __imp_lstrcmpA             0000000180013130     kernel32:KERNEL32.dll
+ 0002:00000138       __imp_lstrcmpiA            0000000180013138     kernel32:KERNEL32.dll
+ 0002:00000140       __imp_MoveFileA            0000000180013140     kernel32:KERNEL32.dll
+ 0002:00000148       __imp_CreateFileA          0000000180013148     kernel32:KERNEL32.dll
+ 0002:00000150       __imp_GetFileSize          0000000180013150     kernel32:KERNEL32.dll
+ 0002:00000158       __imp_CloseHandle          0000000180013158     kernel32:KERNEL32.dll
+ 0002:00000160       __imp_ReadFile             0000000180013160     kernel32:KERNEL32.dll
+ 0002:00000168       __imp_WriteFile            0000000180013168     kernel32:KERNEL32.dll
+ 0002:00000170       __imp_GetPrivateProfileIntA 0000000180013170     kernel32:KERNEL32.dll
+ 0002:00000178       __imp_WritePrivateProfileStringA 0000000180013178     kernel32:KERNEL32.dll
+ 0002:00000180       __imp_GetPrivateProfileStringA 0000000180013180     kernel32:KERNEL32.dll
+ 0002:00000188       __imp_GetFullPathNameA     0000000180013188     kernel32:KERNEL32.dll
+ 0002:00000190       __imp_CreateDirectoryA     0000000180013190     kernel32:KERNEL32.dll
+ 0002:00000198       __imp_GetModuleFileNameA   0000000180013198     kernel32:KERNEL32.dll
+ 0002:000001a0       __imp_FindFirstFileA       00000001800131a0     kernel32:KERNEL32.dll
+ 0002:000001a8       __imp_FindClose            00000001800131a8     kernel32:KERNEL32.dll
+ 0002:000001b0       __imp_DisableThreadLibraryCalls 00000001800131b0     kernel32:KERNEL32.dll
+ 0002:000001b8       __imp_LoadLibraryA         00000001800131b8     kernel32:KERNEL32.dll
+ 0002:000001c0       __imp_FreeLibrary          00000001800131c0     kernel32:KERNEL32.dll
+ 0002:000001c8       __imp_FindResourceA        00000001800131c8     kernel32:KERNEL32.dll
+ 0002:000001d0       \177KERNEL32_NULL_THUNK_DATA 00000001800131d0     kernel32:KERNEL32.dll
+ 0002:000001d8       __imp_ShellExecuteA        00000001800131d8     shell32:SHELL32.dll
+ 0002:000001e0       __imp_ShellExecuteW        00000001800131e0     shell32:SHELL32.dll
+ 0002:000001e8       \177SHELL32_NULL_THUNK_DATA 00000001800131e8     shell32:SHELL32.dll
+ 0002:000001f0       __imp_GetFocus             00000001800131f0     user32:USER32.dll
+ 0002:000001f8       __imp_CreateWindowExA      00000001800131f8     user32:USER32.dll
+ 0002:00000200       __imp_CallNextHookEx       0000000180013200     user32:USER32.dll
+ 0002:00000208       __imp_UnhookWindowsHookEx  0000000180013208     user32:USER32.dll
+ 0002:00000210       __imp_SetWindowsHookExA    0000000180013210     user32:USER32.dll
+ 0002:00000218       __imp_GetDlgCtrlID         0000000180013218     user32:USER32.dll
+ 0002:00000220       __imp_SendMessageA         0000000180013220     user32:USER32.dll
+ 0002:00000228       __imp_InvalidateRect       0000000180013228     user32:USER32.dll
+ 0002:00000230       __imp_LoadAcceleratorsA    0000000180013230     user32:USER32.dll
+ 0002:00000238       __imp_IsWindow             0000000180013238     user32:USER32.dll
+ 0002:00000240       __imp_GetKeyState          0000000180013240     user32:USER32.dll
+ 0002:00000248       __imp_IsDialogMessageA     0000000180013248     user32:USER32.dll
+ 0002:00000250       __imp_GetActiveWindow      0000000180013250     user32:USER32.dll
+ 0002:00000258       __imp_TranslateAcceleratorA 0000000180013258     user32:USER32.dll
+ 0002:00000260       __imp_MessageBoxA          0000000180013260     user32:USER32.dll
+ 0002:00000268       __imp_IsWindowEnabled      0000000180013268     user32:USER32.dll
+ 0002:00000270       __imp_IsIconic             0000000180013270     user32:USER32.dll
+ 0002:00000278       __imp_ShowWindow           0000000180013278     user32:USER32.dll
+ 0002:00000280       __imp_keybd_event          0000000180013280     user32:USER32.dll
+ 0002:00000288       __imp_mouse_event          0000000180013288     user32:USER32.dll
+ 0002:00000290       __imp_SetFocus             0000000180013290     user32:USER32.dll
+ 0002:00000298       __imp_PostMessageA         0000000180013298     user32:USER32.dll
+ 0002:000002a0       __imp_GetWindow            00000001800132a0     user32:USER32.dll
+ 0002:000002a8       __imp_CreateDialogParamA   00000001800132a8     user32:USER32.dll
+ 0002:000002b0       __imp_SetWindowLongPtrA    00000001800132b0     user32:USER32.dll
+ 0002:000002b8       __imp_GetWindowLongPtrA    00000001800132b8     user32:USER32.dll
+ 0002:000002c0       __imp_LoadImageA           00000001800132c0     user32:USER32.dll
+ 0002:000002c8       __imp_LoadMenuA            00000001800132c8     user32:USER32.dll
+ 0002:000002d0       __imp_GetClientRect        00000001800132d0     user32:USER32.dll
+ 0002:000002d8       __imp_GetDlgItem           00000001800132d8     user32:USER32.dll
+ 0002:000002e0       __imp_DestroyWindow        00000001800132e0     user32:USER32.dll
+ 0002:000002e8       __imp_SendDlgItemMessageA  00000001800132e8     user32:USER32.dll
+ 0002:000002f0       __imp_PtInRect             00000001800132f0     user32:USER32.dll
+ 0002:000002f8       __imp_BeginDeferWindowPos  00000001800132f8     user32:USER32.dll
+ 0002:00000300       __imp_EndDeferWindowPos    0000000180013300     user32:USER32.dll
+ 0002:00000308       __imp_GetCaretPos          0000000180013308     user32:USER32.dll
+ 0002:00000310       __imp_ClientToScreen       0000000180013310     user32:USER32.dll
+ 0002:00000318       __imp_GetSubMenu           0000000180013318     user32:USER32.dll
+ 0002:00000320       __imp_TrackPopupMenu       0000000180013320     user32:USER32.dll
+ 0002:00000328       __imp_GetWindowRect        0000000180013328     user32:USER32.dll
+ 0002:00000330       __imp_DestroyIcon          0000000180013330     user32:USER32.dll
+ 0002:00000338       __imp_DestroyMenu          0000000180013338     user32:USER32.dll
+ 0002:00000340       __imp_SetWindowPos         0000000180013340     user32:USER32.dll
+ 0002:00000348       __imp_EnableMenuItem       0000000180013348     user32:USER32.dll
+ 0002:00000350       __imp_IsWindowVisible      0000000180013350     user32:USER32.dll
+ 0002:00000358       __imp_SetWindowPlacement   0000000180013358     user32:USER32.dll
+ 0002:00000360       __imp_GetSystemMetrics     0000000180013360     user32:USER32.dll
+ 0002:00000368       __imp_GetWindowPlacement   0000000180013368     user32:USER32.dll
+ 0002:00000370       __imp_MapWindowPoints      0000000180013370     user32:USER32.dll
+ 0002:00000378       __imp_DeferWindowPos       0000000180013378     user32:USER32.dll
+ 0002:00000380       __imp_EnableWindow         0000000180013380     user32:USER32.dll
+ 0002:00000388       __imp_RegisterWindowMessageA 0000000180013388     user32:USER32.dll
+ 0002:00000390       __imp_wsprintfA            0000000180013390     user32:USER32.dll
+ 0002:00000398       __imp_GetCursorPos         0000000180013398     user32:USER32.dll
+ 0002:000003a0       __imp_GetParent            00000001800133a0     user32:USER32.dll
+ 0002:000003a8       __imp_CallWindowProcA      00000001800133a8     user32:USER32.dll
+ 0002:000003b0       __imp_ScreenToClient       00000001800133b0     user32:USER32.dll
+ 0002:000003b8       __imp_RedrawWindow         00000001800133b8     user32:USER32.dll
+ 0002:000003c0       __imp_DialogBoxParamA      00000001800133c0     user32:USER32.dll
+ 0002:000003c8       __imp_SetDlgItemTextA      00000001800133c8     user32:USER32.dll
+ 0002:000003d0       __imp_GetDC                00000001800133d0     user32:USER32.dll
+ 0002:000003d8       __imp_ReleaseDC            00000001800133d8     user32:USER32.dll
+ 0002:000003e0       __imp_IsDlgButtonChecked   00000001800133e0     user32:USER32.dll
+ 0002:000003e8       __imp_EndDialog            00000001800133e8     user32:USER32.dll
+ 0002:000003f0       __imp_CheckDlgButton       00000001800133f0     user32:USER32.dll
+ 0002:000003f8       __imp_SetPropA             00000001800133f8     user32:USER32.dll
+ 0002:00000400       __imp_GetWindowLongA       0000000180013400     user32:USER32.dll
+ 0002:00000408       __imp_RemovePropA          0000000180013408     user32:USER32.dll
+ 0002:00000410       __imp_GetPropA             0000000180013410     user32:USER32.dll
+ 0002:00000418       __imp_GetCapture           0000000180013418     user32:USER32.dll
+ 0002:00000420       __imp_ReleaseCapture       0000000180013420     user32:USER32.dll
+ 0002:00000428       __imp_ValidateRect         0000000180013428     user32:USER32.dll
+ 0002:00000430       __imp_DragDetect           0000000180013430     user32:USER32.dll
+ 0002:00000438       __imp_SetCapture           0000000180013438     user32:USER32.dll
+ 0002:00000440       __imp_FindWindowExA        0000000180013440     user32:USER32.dll
+ 0002:00000448       __imp_GetWindowTextA       0000000180013448     user32:USER32.dll
+ 0002:00000450       \177USER32_NULL_THUNK_DATA 0000000180013450     user32:USER32.dll
+ 0002:00000458       __imp_OleUninitialize      0000000180013458     ole32:ole32.dll
+ 0002:00000460       __imp_OleInitialize        0000000180013460     ole32:ole32.dll
+ 0002:00000468       \177ole32_NULL_THUNK_DATA  0000000180013468     ole32:ole32.dll
+ 0002:00000470       __imp_GuiUpdateAllViews    0000000180013470     x64bridge:x64bridge.dll
+ 0002:00000478       __imp_DbgMemFindBaseAddr   0000000180013478     x64bridge:x64bridge.dll
+ 0002:00000480       __imp_GuiAddStatusBarMessage 0000000180013480     x64bridge:x64bridge.dll
+ 0002:00000488       __imp_DbgClearCommentRange 0000000180013488     x64bridge:x64bridge.dll
+ 0002:00000490       __imp_DbgClearLabelRange   0000000180013490     x64bridge:x64bridge.dll
+ 0002:00000498       __imp_DbgXrefGet           0000000180013498     x64bridge:x64bridge.dll
+ 0002:000004a0       __imp_DbgSetLabelAt        00000001800134a0     x64bridge:x64bridge.dll
+ 0002:000004a8       __imp_DbgGetCommentAt      00000001800134a8     x64bridge:x64bridge.dll
+ 0002:000004b0       __imp_DbgGetLabelAt        00000001800134b0     x64bridge:x64bridge.dll
+ 0002:000004b8       __imp_DbgMemRead           00000001800134b8     x64bridge:x64bridge.dll
+ 0002:000004c0       __imp_DbgFunctions         00000001800134c0     x64bridge:x64bridge.dll
+ 0002:000004c8       __imp_BridgeFree           00000001800134c8     x64bridge:x64bridge.dll
+ 0002:000004d0       __imp_GuiSelectionGet      00000001800134d0     x64bridge:x64bridge.dll
+ 0002:000004d8       __imp_DbgIsDebugging       00000001800134d8     x64bridge:x64bridge.dll
+ 0002:000004e0       __imp_DbgSetCommentAt      00000001800134e0     x64bridge:x64bridge.dll
+ 0002:000004e8       __imp_GuiExecuteOnGuiThread 00000001800134e8     x64bridge:x64bridge.dll
+ 0002:000004f0       \177x64bridge_NULL_THUNK_DATA 00000001800134f0     x64bridge:x64bridge.dll
+ 0002:000004f8       __imp__plugin_menuclear    00000001800134f8     x64dbg:x64dbg.dll
+ 0002:00000500       __imp__plugin_unregistercommand 0000000180013500     x64dbg:x64dbg.dll
+ 0002:00000508       __imp__plugin_menuaddentry 0000000180013508     x64dbg:x64dbg.dll
+ 0002:00000510       __imp__plugin_registercommand 0000000180013510     x64dbg:x64dbg.dll
+ 0002:00000518       __imp__plugin_logputs      0000000180013518     x64dbg:x64dbg.dll
+ 0002:00000520       __imp__plugin_menuentrysethotkey 0000000180013520     x64dbg:x64dbg.dll
+ 0002:00000528       __imp__plugin_menuaddseparator 0000000180013528     x64dbg:x64dbg.dll
+ 0002:00000530       __imp__plugin_menuseticon  0000000180013530     x64dbg:x64dbg.dll
+ 0002:00000538       \177x64dbg_NULL_THUNK_DATA 0000000180013538     x64dbg:x64dbg.dll
+ 0002:00000540       __guard_dispatch_icall_fptr 0000000180013540     odbccp32:guard_support.obj
+ 0002:00000550       __sz_COMCTL32_dll          0000000180013550     comctl32:COMCTL32.dll
+ 0002:00000560       ??_C@_1BK@DBDEIDLH@?$AAK?$AAE?$AAR?$AAN?$AAE?$AAL?$AA3?$AA2?$AA?4?$AAD?$AAL?$AAL@ 0000000180013560     delayimp:delayhlp.obj
+ 0002:00000580       ??_C@_0BI@OMNLIJDB@AcquireSRWLockExclusive@ 0000000180013580     delayimp:delayhlp.obj
+ 0002:00000598       ??_C@_0BI@HMIEPCNJ@ReleaseSRWLockExclusive@ 0000000180013598     delayimp:delayhlp.obj
+ 0002:000005b0       __pfnDliNotifyHook2        00000001800135b0     delayimp:delayhk2.obj
+ 0002:000005b8       __pfnDliFailureHook2       00000001800135b8     delayimp:delayhk1.obj
+ 0002:000005c0       __bChangeProtectionOfWholeDloadSection 00000001800135c0     delayimp:delaygv1.obj
+ 0002:000005d0       ??_C@_0ME@NDNAJFIL@ja?5jae?5jb?5jbe?5jc?5jcxz?5je?5jg?5jge@ 00000001800135d0     assembler_dlg.obj
+ 0002:00000694       ??_C@_04OMFAIDPG@call@     0000000180013694     assembler_dlg.obj
+ 0002:000006a0       ??_C@_0CM@BACMNIGN@ret?5retf?5retn?5iret?5iretd?5iretdf@ 00000001800136a0     assembler_dlg.obj
+ 0002:000006d0       ??_C@_0BI@IOJNGPOM@nop?5int3?5int1?5icebp?5hlt@ 00000001800136d0     assembler_dlg.obj
+ 0002:000006f0       ??_C@_0FCH@CLJKALHO@aaa?5aad?5aam?5aas?5adc?5add?5and?5cbw@ 00000001800136f0     assembler_dlg.obj
+ 0002:00000c20       ??_C@_0CMA@GHNCNJEE@f2xm1?5fabs?5fadd?5faddp?5fbld?5fbst@ 0000000180013c20     assembler_dlg.obj
+ 0002:00000ee0       ??_C@_0HFK@PHFOCGM@addpd?5addps?5addsd?5addss?5andpd?5a@ 0000000180013ee0     assembler_dlg.obj
+ 0002:00001640       ??_C@_0DD@LLIGGPMK@esp?5ebp?5eip?5rip?5sp?5bp?5ip?5cs?5ds?5@ 0000000180014640     assembler_dlg.obj
+ 0002:00001680       ??_C@_0BKB@MLOIPOED@ah?5al?5ax?5bh?5bl?5bx?5ch?5cl?5cx?5dh?5d@ 0000000180014680     assembler_dlg.obj
+ 0002:00001828       ??_C@_0CM@KPOOFBPJ@byte?5word?5dword?5qword?5dqword?5db@ 0000000180014828     assembler_dlg.obj
+ 0002:00001858       ??_C@_0BI@BLGDAFFI@ptr?5short?5long?5near?5far@ 0000000180014858     assembler_dlg.obj
+ 0002:00001870       ??_C@_0CD@DPGLCL@Multiline?5Ultimate?5Assembler?5er@ 0000000180014870     assembler_dlg.obj
+ 0002:00001898       ??_C@_0BH@DPEOEDIP@Couldn?8t?5create?5dialog@ 0000000180014898     assembler_dlg.obj
+ 0002:000018b0       ??_C@_01ICJEACDI@?$DL@     00000001800148b0     assembler_dlg.obj
+ 0002:000018b8       ??_C@_09JIMHCNEF@color_jmp@ 00000001800148b8     assembler_dlg.obj
+ 0002:000018c8       ??_C@_0L@JNJMNBEE@color_call@ 00000001800148c8     assembler_dlg.obj
+ 0002:000018d8       ??_C@_09GHBFMGIJ@color_ret@ 00000001800148d8     assembler_dlg.obj
+ 0002:000018e8       ??_C@_09BECBGOHM@color_nop@ 00000001800148e8     assembler_dlg.obj
+ 0002:000018f8       ??_C@_0BC@HEKNFAGA@color_reg_special@ 00000001800148f8     assembler_dlg.obj
+ 0002:00001910       ??_C@_09LLJIFGJL@color_fpu@ 0000000180014910     assembler_dlg.obj
+ 0002:00001920       ??_C@_09LOCFJJIM@color_ext@ 0000000180014920     assembler_dlg.obj
+ 0002:00001930       ??_C@_0L@BOAPAEPL@color_type@ 0000000180014930     assembler_dlg.obj
+ 0002:00001940       ??_C@_0M@DDFEHGHN@color_other@ 0000000180014940     assembler_dlg.obj
+ 0002:00001950       ??_C@_0N@KBPKLPJF@color_jmp_bg@ 0000000180014950     assembler_dlg.obj
+ 0002:00001960       ??_C@_0O@OEIIPDGK@color_call_bg@ 0000000180014960     assembler_dlg.obj
+ 0002:00001970       ??_C@_0N@OMBIEJJB@color_ret_bg@ 0000000180014970     assembler_dlg.obj
+ 0002:00001980       ??_C@_0N@BIHNDKIN@color_nop_bg@ 0000000180014980     assembler_dlg.obj
+ 0002:00001990       ??_C@_0BF@KIIKLEIP@color_reg_special_bg@ 0000000180014990     assembler_dlg.obj
+ 0002:000019a8       ??_C@_0N@BBPCELNE@color_fpu_bg@ 00000001800149a8     assembler_dlg.obj
+ 0002:000019b8       ??_C@_0N@PBCJPKJE@color_ext_bg@ 00000001800149b8     assembler_dlg.obj
+ 0002:000019c8       ??_C@_0O@LPMDLJGA@color_type_bg@ 00000001800149c8     assembler_dlg.obj
+ 0002:000019d8       ??_C@_0P@LLMLENHH@color_other_bg@ 00000001800149d8     assembler_dlg.obj
+ 0002:000019e8       ??_C@_0N@MLFIKEMD@color_reg_bg@ 00000001800149e8     assembler_dlg.obj
+ 0002:00001a00       ??_C@_0FGL@PJMFJBLK@aaa?5aad?5aam?5aas?5adc?5add?5and?5cbw@ 0000000180014a00     assembler_dlg.obj
+ 0002:00001f70       ??_C@_0BNE@EBLCGIOH@ah?5al?5ax?5bh?5bl?5bx?5ch?5cl?5cx?5dh?5d@ 0000000180014f70     assembler_dlg.obj
+ 0002:00002150       ??_C@_0EE@POKIGHOM@byte?5word?5dword?5qword?5dqword?5db@ 0000000180015150     assembler_dlg.obj
+ 0002:000021a0       ??_C@_0MJ@LJBFLNNL@ja?5jae?5jb?5jbe?5jc?5jcxz?5je?5jg?5jge@ 00000001800151a0     assembler_dlg.obj
+ 0002:0000226c       ??_C@_05KHPBCGAA@pos_x@    000000018001526c     assembler_dlg.obj
+ 0002:00002274       ??_C@_05LOOKBHEB@pos_y@    0000000180015274     assembler_dlg.obj
+ 0002:0000227c       ??_C@_05CAGJDKMP@pos_w@    000000018001527c     assembler_dlg.obj
+ 0002:00002284       ??_C@_05ONDDDEFB@pos_h@    0000000180015284     assembler_dlg.obj
+ 0002:00002290       ??_C@_0BE@HCHEOIBF@commdlg_FindReplace@ 0000000180015290     assembler_dlg.obj
+ 0002:000022a8       ??_C@_0BB@IDFILOOM@Cannot?5find?5?$CC?$CFs?$CC@ 00000001800152a8     assembler_dlg.obj
+ 0002:000022bc       ??_C@_04OLJIFFAL@Find@     00000001800152bc     assembler_dlg.obj
+ 0002:000022c8       ??_C@_0BN@JNLFPABJ@No?5occurrences?5were?5replaced@ 00000001800152c8     assembler_dlg.obj
+ 0002:000022e8       ??_C@_0BK@GJEGCAIG@1?5occurrence?5was?5replaced@ 00000001800152e8     assembler_dlg.obj
+ 0002:00002308       ??_C@_0BN@CDKLLPEJ@?$CFu?5occurrences?5were?5replaced@ 0000000180015308     assembler_dlg.obj
+ 0002:00002328       ??_C@_0M@KNDNFOFG@Replace?5All@ 0000000180015328     assembler_dlg.obj
+ 0002:00002338       ??_C@_0BF@FMEPBPDI@No?5process?5is?5loaded@ 0000000180015338     assembler_dlg.obj
+ 0002:00002350       ??_C@_0BC@EALFJCBA@Allocation?5failed@ 0000000180015350     assembler_dlg.obj
+ 0002:00002368       ??_C@_0BE@GOEJBAOB@Assembly?5Succeeded?$CB@ 0000000180015368     assembler_dlg.obj
+ 0002:00002380       ??_C@_09JOMNKBFE@tabs_path@ 0000000180015380     assembler_dlg_tabs.obj
+ 0002:00002390       ??_C@_0L@OHNPFKPM@?4?2multiasm@ 0000000180015390     assembler_dlg_tabs.obj
+ 0002:000023a0       ??_C@_0DJ@JEAHEPCD@Could?5not?5use?5specified?5directo@ 00000001800153a0     assembler_dlg_tabs.obj
+ 0002:000023e0       ??_C@_08PHMOOECG@tabs?4ini@ 00000001800153e0     assembler_dlg_tabs.obj
+ 0002:000023ec       ??_C@_04HOGMCHDB@lib?2@    00000001800153ec     assembler_dlg_tabs.obj
+ 0002:000023f8       ??_C@_0N@GICDPLLD@tabs_counter@ 00000001800153f8     assembler_dlg_tabs.obj
+ 0002:00002408       ??_C@_0P@OBDPJOOJ@tabs_last_open@ 0000000180015408     assembler_dlg_tabs.obj
+ 0002:00002418       ??_C@_0O@IJECLIOI@tabs_file?$FL?$CFd?$FN@ 0000000180015418     assembler_dlg_tabs.obj
+ 0002:00002428       ??_C@_04ECFCMKAC@?4asm@    0000000180015428     assembler_dlg_tabs.obj
+ 0002:00002430       ??_C@_05DJLAFFPD@?5?$CI?$CFu?$CJ@ 0000000180015430     assembler_dlg_tabs.obj
+ 0002:00002438       ??_C@_02GMHACPFF@?$CFu@    0000000180015438     assembler_dlg_tabs.obj
+ 0002:0000243b       ??_C@_00CNPNBAHC@@         000000018001543b     assembler_dlg_tabs.obj
+ 0002:00002440       ??_C@_0BG@JGEIAFHH@Failed?5to?5delete?5file@ 0000000180015440     assembler_dlg_tabs.obj
+ 0002:00002458       ??_C@_0CK@KKKICKB@Failed?5to?5delete?5one?5or?5more?5of@ 0000000180015458     assembler_dlg_tabs.obj
+ 0002:00002488       ??_C@_0BI@JBJLDGPG@Such?5tab?5already?5exists@ 0000000180015488     assembler_dlg_tabs.obj
+ 0002:000024a0       ??_C@_0BJ@LILCEKBA@Such?5file?5already?5exists@ 00000001800154a0     assembler_dlg_tabs.obj
+ 0002:000024c0       ??_C@_0BG@EPIAOGFK@Failed?5to?5rename?5file@ 00000001800154c0     assembler_dlg_tabs.obj
+ 0002:000024d8       ??_C@_0BP@BIEIGDMO@Could?5not?5read?5content?5of?5file@ 00000001800154d8     assembler_dlg_tabs.obj
+ 0002:000024f8       ??_C@_0BJ@IKCNAAJ@Could?5not?5read?5file?5size@ 00000001800154f8     assembler_dlg_tabs.obj
+ 0002:00002518       ??_C@_0BJ@LFBPMJAD@Memory?5allocation?5failed@ 0000000180015518     assembler_dlg_tabs.obj
+ 0002:00002538       ??_C@_0BJ@HBCEFLHK@Could?5not?5read?5file?5data@ 0000000180015538     assembler_dlg_tabs.obj
+ 0002:00002558       ??_C@_0BL@PPDPLLNE@Could?5not?5create?5directory@ 0000000180015558     assembler_dlg_tabs.obj
+ 0002:00002578       ??_C@_0BP@MLBIGFAH@Could?5not?5save?5content?5to?5file@ 0000000180015578     assembler_dlg_tabs.obj
+ 0002:00002598       ??_C@_0BI@FNIDBNLC@Failed?5to?5write?5to?5file@ 0000000180015598     assembler_dlg_tabs.obj
+ 0002:000025b0       ??_C@_0DD@BOCELJIN@Assembler?5files?5?$CI?$CK?4asm?$CJ?$AA?$CK?4asm?$AAA@ 00000001800155b0     assembler_dlg_tabs.obj
+ 0002:000025e8       ??_C@_0BE@LPCACCJA@Load?5code?5from?5file@ 00000001800155e8     assembler_dlg_tabs.obj
+ 0002:000025fc       ??_C@_03NLMFHDGG@asm@      00000001800155fc     assembler_dlg_tabs.obj
+ 0002:00002600       ??_C@_0DE@DGIPPHF@Could?5not?5read?5content?5of?5at?5le@ 0000000180015600     assembler_dlg_tabs.obj
+ 0002:00002640       ??_C@_0EB@FANHBHCM@Our?5buffer?5is?5too?5small?5for?5you@ 0000000180015640     assembler_dlg_tabs.obj
+ 0002:00002688       ??_C@_0BC@MFLLNIPO@Save?5code?5to?5file@ 0000000180015688     assembler_dlg_tabs.obj
+ 0002:000026a0       ??_C@_09MEHKOFDP@?2?1?3?$CK?$DP?$CC?$DM?$DO?$HM@ 00000001800156a0     assembler_dlg_tabs.obj
+ 0002:000026ac       ??_C@_04PJFEOLPA@tabs@     00000001800156ac     assembler_dlg_tabs.obj
+ 0002:000026b8       ??_C@_0N@OLBDIKGE@multiasm?4ini@ 00000001800156b8     main_common.obj
+ 0002:000026d0       ??_C@_0BEPM@CDKFHCGO@?$FLMultiline?5Ultimate?5Assembler?$FN?$AN@ 00000001800156d0     main_common.obj
+ 0002:00003bd0       ??_C@_0BH@FIBNMAAI@OleInitialize?$CI?$CJ?5failed@ 0000000180016bd0     main_common.obj
+ 0002:00003be8       ??_C@_0O@DEOGIPBA@Scintilla?4dll@ 0000000180016be8     main_common.obj
+ 0002:00003bf8       ??_C@_0BN@LKMGFLOH@Failed?5to?5load?5Scintilla?4dll@ 0000000180016bf8     main_common.obj
+ 0002:00003c18       ??_C@_0L@LCONHDBN@disasm_rva@ 0000000180016c18     main_common.obj
+ 0002:00003c28       ??_C@_0BF@LADOEHIG@disasm_rva_reloconly@ 0000000180016c28     main_common.obj
+ 0002:00003c40       ??_C@_0N@EIJNFEIA@disasm_label@ 0000000180016c40     main_common.obj
+ 0002:00003c50       ??_C@_0O@MFIPGJEB@disasm_extjmp@ 0000000180016c50     main_common.obj
+ 0002:00003c60       ??_C@_0L@ICJHANH@disasm_hex@ 0000000180016c60     main_common.obj
+ 0002:00003c70       ??_C@_0BA@KCMPOMDJ@disasm_labelgen@ 0000000180016c70     main_common.obj
+ 0002:00003c80       ??_C@_0N@EMIKEDDL@asm_comments@ 0000000180016c80     main_common.obj
+ 0002:00003c90       ??_C@_0L@BMBNHPOK@asm_labels@ 0000000180016c90     main_common.obj
+ 0002:00003ca0       ??_C@_0N@BOMCEFMI@edit_savepos@ 0000000180016ca0     main_common.obj
+ 0002:00003cb0       ??_C@_0O@DONFHLJL@edit_tabwidth@ 0000000180016cb0     main_common.obj
+ 0002:00003cc0       ??_C@_09JONFMPID@font_name@ 0000000180016cc0     main_common.obj
+ 0002:00003cd0       ??_C@_0P@PPJHFMDD@Lucida?5Console@ 0000000180016cd0     main_common.obj
+ 0002:00003ce0       ??_C@_09NKHIABKK@font_size@ 0000000180016ce0     main_common.obj
+ 0002:00003cf0       ??_C@_09KDCDAOMH@font_bold@ 0000000180016cf0     main_common.obj
+ 0002:00003d00       ??_C@_0M@DMOHENJK@font_italic@ 0000000180016d00     main_common.obj
+ 0002:00003d10       ??_C@_0N@IOPCCJDN@font_charset@ 0000000180016d10     main_common.obj
+ 0002:00003d20       ??_C@_0O@FOCHMPEF@bg_use_custom@ 0000000180016d20     main_common.obj
+ 0002:00003d30       ??_C@_08NOKADADF@bg_color@ 0000000180016d30     main_common.obj
+ 0002:00003d40       ??_C@_09MLGBLFJK@color_cmd@ 0000000180016d40     main_common.obj
+ 0002:00003d50       ??_C@_0N@KBACMLAE@color_cmd_bg@ 0000000180016d50     main_common.obj
+ 0002:00003d60       ??_C@_09GPKIHBL@color_reg@ 0000000180016d60     main_common.obj
+ 0002:00003d70       ??_C@_0L@FGNFCCML@color_cmnt@ 0000000180016d70     main_common.obj
+ 0002:00003d80       ??_C@_09PKPMCEMG@color_num@ 0000000180016d80     main_common.obj
+ 0002:00003d90       ??_C@_0BC@IHKAIPKA@color_jmp_line_bg@ 0000000180016d90     main_common.obj
+ 0002:00003da8       ??_C@_0BD@EGHNKINH@color_call_line_bg@ 0000000180016da8     main_common.obj
+ 0002:00003dc0       ??_C@_0N@OEEPNDLG@multiasm?4chm@ 0000000180016dc0     main_common.obj
+ 0002:00003dd0       ??_C@_19BDAJEHDN@?$AAo?$AAp?$AAe?$AAn@ 0000000180016dd0     main_common.obj
+ 0002:00003de0       ??_C@_0BE@KOEOLILI@Failed?5to?5open?5link@ 0000000180016de0     main_common.obj
+ 0002:00003e00       ??_C@_1BNO@KEIEODBF@?$AAM?$AAu?$AAl?$AAt?$AAi?$AAl?$AAi?$AAn?$AAe?$AA?5?$AAU?$AAl?$AAt?$AAi?$AAm@ 0000000180016e00     main_common.obj
+ 0002:00003fe0       ??_C@_1M@EMIHAPOM@?$AAA?$AAb?$AAo?$AAu?$AAt@ 0000000180016fe0     main_common.obj
+ 0002:00003ff0       _load_config_used          0000000180016ff0     main_common.obj
+ 0002:00004138       ??_C@_03NAIKFGEJ@PNG@      0000000180017138     main_x64dbg.obj
+ 0002:00004140       ??_C@_0BO@PHOGDFNA@?$CGMultiline?5Ultimate?5Assembler@ 0000000180017140     main_x64dbg.obj
+ 0002:00004160       ??_C@_08NFEHGBLD@?$CGOptions@ 0000000180017160     main_x64dbg.obj
+ 0002:0000416c       ??_C@_05JFEBOHHM@?$CGHelp@ 000000018001716c     main_x64dbg.obj
+ 0002:00004174       ??_C@_06JDCECANP@?$CGAbout@ 0000000180017174     main_x64dbg.obj
+ 0002:00004180       ??_C@_0BH@POENJJAE@?$CGDisassemble?5selection@ 0000000180017180     main_x64dbg.obj
+ 0002:00004198       ??_C@_06EOOGDOP@Ctrl?$CLM@ 0000000180017198     main_x64dbg.obj
+ 0002:000041a0       ??_C@_0N@HFFKGIHL@Ctrl?$CLShift?$CLM@ 00000001800171a0     main_x64dbg.obj
+ 0002:000041b0       ??_C@_0BN@JECMPMHH@Multiline?5Ultimate?5Assembler@ 00000001800171b0     main_x64dbg.obj
+ 0002:000041d0       ??_C@_0CE@PLNDLDOL@Multiline?5Ultimate?5Assembler?5v2@ 00000001800171d0     main_x64dbg.obj
+ 0002:000041f8       ??_C@_0BP@BJPICIPM@?5?5Copyright?5?$CIC?$CJ?5Ramen?5Software@ 00000001800171f8     main_x64dbg.obj
+ 0002:00004218       ??_C@_0O@OBICCLND@multiasm_show@ 0000000180017218     main_x64dbg.obj
+ 0002:00004228       ??_C@_0BK@DEECKHAD@multiasm_disasm_selection@ 0000000180017228     main_x64dbg.obj
+ 0002:00004248       ??_C@_0P@PGOOJCCA@multiasm_close@ 0000000180017248     main_x64dbg.obj
+ 0002:00004258       ??_C@_05LOKMOJMB@2?43?48@  0000000180017258     main_x64dbg.obj
+ 0002:00004260       ??_C@_0CM@OAPODGHE@Failed?5to?5open?5the?5?$CCmultiasm?4ch@ 0000000180017260     main_x64dbg.obj
+ 0002:00004290       ??_C@_0CC@OLMMLMAL@Command?5does?5not?5accept?5argumen@ 0000000180017290     main_x64dbg.obj
+ 0002:000042b8       ??_C@_09JDGHINLE@?5?$CIItalic?$CJ@ 00000001800172b8     options_dlg.obj
+ 0002:000042c8       ??_C@_07LMGDMKGM@?5?$CIBold?$CJ@ 00000001800172c8     options_dlg.obj
+ 0002:000042d0       ??_C@_0N@GEPGPLDG@?$CFs?0?5?$CFdpt?$CFs?$CFs@ 00000001800172d0     options_dlg.obj
+ 0002:000042e0       ??_C@_0BH@DILBJLBK@?$CIdisassembler?5default?$CJ@ 00000001800172e0     options_dlg.obj
+ 0002:000042f8       ??_C@_04KJAIOINI@FFFE@     00000001800172f8     options_dlg.obj
+ 0002:00004300       ??_C@_05NKJCLJML@0FFFE@    0000000180017300     options_dlg.obj
+ 0002:00004308       ??_C@_06KBEIGICO@0FFFEh@   0000000180017308     options_dlg.obj
+ 0002:00004310       ??_C@_06LNFEOKEF@0xFFFE@   0000000180017310     options_dlg.obj
+ 0002:00004318       ??_C@_0L@LBJPPIEN@L?$FLcounter?$FN@ 0000000180017318     options_dlg.obj
+ 0002:00004328       ??_C@_0M@EMKBGKHJ@L_?$FLaddress?$FN@ 0000000180017328     options_dlg.obj
+ 0002:00004338       ??_C@_0BH@PPKLHPJE@L_?$FLtab_name?$FN_?$FLcounter?$FN@ 0000000180017338     options_dlg.obj
+ 0002:00004350       ??_C@_01FDFGLJHB@2@        0000000180017350     options_dlg.obj
+ 0002:00004354       ??_C@_01FAMBOPH@4@         0000000180017354     options_dlg.obj
+ 0002:00004358       ??_C@_01KJLJFBPL@8@        0000000180017358     options_dlg.obj
+ 0002:0000435c       ??_C@_06IMJBDBNO@0x?$CF08X@ 000000018001735c     plugin_x64dbg.obj
+ 0002:00004364       ??_C@_02DPKJAMEF@?$CFd@    0000000180017364     plugin_x64dbg.obj
+ 0002:00004368       ??_C@_06NGDDPBNF@SHORT?5@  0000000180017368     plugin_x64dbg.obj
+ 0002:00004370       ??_C@_06EHJMALKF@short?5@  0000000180017370     plugin_x64dbg.obj
+ 0002:00004378       ??_C@_0DA@BGMBLELG@AssembleWithGivenSize?3?5internal@ 0000000180017378     plugin_x64dbg.obj
+ 0002:000043a8       ??_C@_0BL@NOPPMJDE@Could?5not?5read?5from?5memory@ 00000001800173a8     read_asm.obj
+ 0002:000043c8       ??_C@_0CE@IIOHGFBB@Disasm?5failed?5on?5address?50x?$CF016@ 00000001800173c8     read_asm.obj
+ 0002:000043f0       ??_C@_0CM@MEBEMAPH@Could?5not?5read?5memory?5on?5addres@ 00000001800173f0     read_asm.obj
+ 0002:0000441c       ??_C@_05LHJNPFAF@L?$CF08u@ 000000018001741c     read_asm.obj
+ 0002:00004428       ??_C@_0L@EAAKMBGM@L_?$CF016I64X@ 0000000180017428     read_asm.obj
+ 0002:00004438       ??_C@_09CFOMIDOI@L_?$CFs_?$CF08u@ 0000000180017438     read_asm.obj
+ 0002:00004448       ??_C@_0BN@OKNJKMPH@Couldn?8t?5make?5RVA?5label?5text@ 0000000180017448     read_asm.obj
+ 0002:00004468       ??_C@_02DKCKIIND@?$CFs@    0000000180017468     read_asm.obj
+ 0002:0000446c       ??_C@_05BFFHGHIN@?$DO?$AN?6?$AN?6@ 000000018001746c     read_asm.obj
+ 0002:00004474       ??_C@_06KCCKDIHO@?$EA?$CFs?3?$AN?6@ 0000000180017474     read_asm.obj
+ 0002:0000447c       ??_C@_03JJCHMBFH@?7?$CFs@  000000018001747c     read_asm.obj
+ 0002:00004480       ??_C@_05FMGNDPN@?5?$DL?5?$CFs@ 0000000180017480     read_asm.obj
+ 0002:00004488       ??_C@_06FDGAKNJH@$?$CC?$CFs?$CC?4@ 0000000180017488     read_asm.obj
+ 0002:00004490       ??_C@_04MHMAABAP@$?$CFs?4@ 0000000180017490     read_asm.obj
+ 0002:00004498       ??_C@_03EEHOBOPM@?$CFIX@   0000000180017498     read_asm.obj
+ 0002:0000449c       ??_C@_04GPIFAJG@LOCK@      000000018001749c     read_asm.obj
+ 0002:000044a4       ??_C@_03HDFFPFLF@REP@      00000001800174a4     read_asm.obj
+ 0002:000044a8       ??_C@_08FJMJDCMD@?$CF016I64X@ 00000001800174a8     read_asm.obj
+ 0002:000044b8       ??_C@_0O@IKCFLABM@TabCtrlExProp@ 00000001800174b8     tabctrl_ex.obj
+ 0002:000044c8       ??_C@_0BA@HHHBMONL@msctls_updown32@ 00000001800174c8     tabctrl_ex.obj
+ 0002:000044d8       ??_C@_04NABONMNG@edit@     00000001800174d8     tabctrl_ex.obj
+ 0002:000044e0       ??_C@_0BP@LHNJANON@Empty?5code?5cave?5is?5not?5allowed@ 00000001800174e0     write_asm.obj
+ 0002:00004500       ??_C@_0DD@NHNCPALP@The?5code?5cave?5block?5must?5follow@ 0000000180017500     write_asm.obj
+ 0002:00004538       ??_C@_0BB@CAEKGME@Address?5expected@ 0000000180017538     write_asm.obj
+ 0002:00004550       ??_C@_0EC@FEFCMBJK@End?5of?5code?5block?5exceeds?5the?5b@ 0000000180017550     write_asm.obj
+ 0002:000045a0       ??_C@_0EL@PNCECILB@The?5?$CBpad?5special?5command?5can?5on@ 00000001800175a0     write_asm.obj
+ 0002:000045f0       ??_C@_07JEDAPFNH@COMMENT@  00000001800175f0     write_asm.obj
+ 0002:000045f8       ??_C@_0CG@GOCKBBH@Could?5not?5parse?5address?0?5?8?$DM?8?5ex@ 00000001800175f8     write_asm.obj
+ 0002:00004620       ??_C@_09CHIDKAHH@codecave?3@ 0000000180017620     write_asm.obj
+ 0002:00004630       ??_C@_0BG@BDGOIIKH@Invalid?5codecave?5name@ 0000000180017630     write_asm.obj
+ 0002:00004648       ??_C@_0CE@JAFCANGM@Invalid?5characters?5in?5codecave?5@ 0000000180017648     write_asm.obj
+ 0002:00004670       ??_C@_0CH@LKPGFPBF@Could?5not?5parse?5codecave?0?5?8?$DO?8?5e@ 0000000180017670     write_asm.obj
+ 0002:000046a0       ??_C@_0EO@ENMHHLPO@The?5RVA?5base?5address?5of?5both?5th@ 00000001800176a0     write_asm.obj
+ 0002:000046f0       ??_C@_0DH@EOMIMJEI@The?5end?5address?5must?5be?5greater@ 00000001800176f0     write_asm.obj
+ 0002:00004728       ??_C@_0CG@OKNJDPII@Could?5not?5parse?5address?0?5?8?$DO?8?5ex@ 0000000180017728     write_asm.obj
+ 0002:00004750       ??_C@_0CO@OIPFOEHK@Could?5not?5parse?5anonymous?5label@ 0000000180017750     write_asm.obj
+ 0002:00004780       ??_C@_0CE@JFEJIMIO@Could?5not?5parse?5label?0?5?8?$EA?8?5expe@ 0000000180017780     write_asm.obj
+ 0002:000047a8       ??_C@_0BG@HNPCPHHI@Could?5not?5parse?5label@ 00000001800177a8     write_asm.obj
+ 0002:000047c0       ??_C@_0CE@FLDEOFBL@Could?5not?5parse?5label?0?5?8?3?8?5expe@ 00000001800177c0     write_asm.obj
+ 0002:000047e4       ??_C@_06LNOFJDNM@return@   00000001800177e4     write_asm.obj
+ 0002:000047f0       ??_C@_0CE@FKOHCKAI@The?5label?5name?5?8return?8?5is?5rese@ 00000001800177f0     write_asm.obj
+ 0002:00004818       ??_C@_0BD@PFHNFBJG@Label?5redefinition@ 0000000180017818     write_asm.obj
+ 0002:00004830       ??_C@_0CF@KEFKCOJN@Could?5not?5parse?5string?0?5?8?$CC?8?5exp@ 0000000180017830     write_asm.obj
+ 0002:00004860       ??_C@_0EH@LMEMOOLI@Could?5not?5parse?5string?0?5hex?5con@ 0000000180017860     write_asm.obj
+ 0002:000048a8       ??_C@_0DJ@FDKEHOGE@Could?5not?5parse?5string?0?5value?5i@ 00000001800178a8     write_asm.obj
+ 0002:000048e8       ??_C@_0DP@EKEJIANK@Could?5not?5parse?5string?0?5unrecog@ 00000001800178e8     write_asm.obj
+ 0002:00004928       ??_C@_0BO@BNBJJFGB@Empty?5strings?5are?5not?5allowed@ 0000000180017928     write_asm.obj
+ 0002:00004948       ??_C@_0CJ@ONELGFBA@Unexpected?5input?5after?5string?5d@ 0000000180017948     write_asm.obj
+ 0002:00004978       ??_C@_0CF@GFDJJBIL@Could?5not?5parse?5string?0?5?8L?8?5exp@ 0000000180017978     write_asm.obj
+ 0002:000049a0       ??_C@_0DF@FEDCKDL@No?5more?5than?54?5RVA?5addresses?5al@ 00000001800179a0     write_asm.obj
+ 0002:000049d8       ??_C@_0CO@MCCBHNAH@No?5more?5than?54?5labels?5allowed?5f@ 00000001800179d8     write_asm.obj
+ 0002:00004a08       ??_C@_0BM@MGEDFEFA@Internal?5disassembler?5error@ 0000000180017a08     write_asm.obj
+ 0002:00004a28       ??_C@_0CO@OFHDHBFH@Could?5not?5parse?5special?5command@ 0000000180017a28     write_asm.obj
+ 0002:00004a58       ??_C@_0BI@NEPKGMAI@Unknown?5special?5command@ 0000000180017a58     write_asm.obj
+ 0002:00004a70       ??_C@_0CN@NEGFOEGF@Could?5not?5parse?5command?0?5whites@ 0000000180017a70     write_asm.obj
+ 0002:00004aa0       ??_C@_0CG@BDELFEKO@Unexpected?5input?5after?5end?5of?5c@ 0000000180017aa0     write_asm.obj
+ 0002:00004ac8       ??_C@_0CI@NPHOLKDN@Out?5of?5range?5error?0?5byte?5value?5@ 0000000180017ac8     write_asm.obj
+ 0002:00004af0       ??_C@_0CH@CLMMGJHL@The?5align?5value?5must?5be?5greater@ 0000000180017af0     write_asm.obj
+ 0002:00004b18       ??_C@_0CF@BHLHGDAP@The?5align?5value?5must?5be?5a?5power@ 0000000180017b18     write_asm.obj
+ 0002:00004b40       ??_C@_0CK@OOPPMDD@Could?5not?5parse?5RVA?5address?0?5?8$@ 0000000180017b40     write_asm.obj
+ 0002:00004b70       ??_C@_0DN@MCGMEEFC@Could?5not?5parse?5RVA?5address?0?5th@ 0000000180017b70     write_asm.obj
+ 0002:00004bb0       ??_C@_0CK@OBNCFJND@Could?5not?5parse?5RVA?5address?0?5?8?$CC@ 0000000180017bb0     write_asm.obj
+ 0002:00004be0       ??_C@_0CK@OENIBEFC@Could?5not?5parse?5RVA?5address?0?5?8?4@ 0000000180017be0     write_asm.obj
+ 0002:00004c10       ??_C@_0BI@OGIGENCO@There?5is?5no?5module?5?$CC?$CFs?$CC@ 0000000180017c10     write_asm.obj
+ 0002:00004c30       ??_C@_0ED@GJCNPAAO@Can?8t?5identify?5the?5module?5curre@ 0000000180017c30     write_asm.obj
+ 0002:00004c78       ??_C@_0CI@OLOFNNLD@The?5RVA?5address?5exceeds?5the?5mod@ 0000000180017c78     write_asm.obj
+ 0002:00004ca0       ??_C@_0BJ@FAKAJNDD@Could?5not?5parse?5constant@ 0000000180017ca0     write_asm.obj
+ 0002:00004cc0       ??_C@_0CI@CDNNCOHE@Please?5don?8t?5mix?50xXXXX?5and?5XXX@ 0000000180017cc0     write_asm.obj
+ 0002:00004ce8       ??_C@_0BG@JGOCJLC@Where?5are?5the?5labels?$DP@ 0000000180017ce8     write_asm.obj
+ 0002:00004d00       ??_C@_0BO@DHDGHMKM@The?5code?5cave?5was?5not?5defined@ 0000000180017d00     write_asm.obj
+ 0002:00004d20       ??_C@_0CE@IGLLGAKP@The?5anonymous?5label?5was?5not?5def@ 0000000180017d20     write_asm.obj
+ 0002:00004d50       ??_C@_0EP@BGGHPIJD@The?5?$EAreturn?5label?5can?5only?5be?5u@ 0000000180017d50     write_asm.obj
+ 0002:00004da0       ??_C@_0BK@OPLEMCHE@The?5label?5was?5not?5defined@ 0000000180017da0     write_asm.obj
+ 0002:00004dc0       ??_C@_0DD@CLEAIKAK@Failed?5to?5find?5memory?5block?5for@ 0000000180017dc0     write_asm.obj
+ 0002:00004e00       ??_C@_0EA@MBEILIDH@End?5of?5code?5block?5exceeds?5end?5o@ 0000000180017e00     write_asm.obj
+ 0002:00004e40       ??_C@_0CN@JLFJOFKI@Failed?5to?5write?5memory?5on?5addre@ 0000000180017e40     write_asm.obj
+ 0002:00004e70       ??_C@_03KHICJKCI@?4?4?4@   0000000180017e70     write_asm.obj
+ 0002:00004e78       ??_C@_0CM@EAKJOABK@Failed?5to?5set?5comment?5on?5addres@ 0000000180017e78     write_asm.obj
+ 0002:00004ea8       ??_C@_0CK@CGCLJBBP@Failed?5to?5set?5label?5on?5address?5@ 0000000180017ea8     write_asm.obj
+ 0002:00004ed4       ??_C@_05BJCAMMOA@0x?$CFIX@ 0000000180017ed4     write_asm.obj
+ 0002:00004ee0       ??_C@_0CK@FLLLMHBE@Allocation?5failed?5during?5cave?5r@ 0000000180017ee0     write_asm.obj
+ 0002:00004f10       ??_C@_0CN@MHEDIMLD@Failed?5to?5find?5memory?5block?5for@ 0000000180017f10     write_asm.obj
+ 0002:00004f40       ??_C@_0CH@FHBIKOEO@Allocation?5failed?5during?5cave?5s@ 0000000180017f40     write_asm.obj
+ 0002:00004f68       ??_C@_0DB@PHOKOMJM@No?5suitable?5code?5cave?5found?5of?5@ 0000000180017f68     write_asm.obj
+ 0002:00004fa0       __real@3fbd2f1a9fbe76c9    0000000180017fa0     assembler_dlg.obj
+ 0002:00004fa8       __real@3fd322d0e5604189    0000000180017fa8     assembler_dlg.obj
+ 0002:00004fb0       __real@3fe2c8b439581062    0000000180017fb0     assembler_dlg.obj
+ 0002:00004fb8       __real@4060000000000000    0000000180017fb8     assembler_dlg.obj
+ 0002:00005000       __volatile_metadata        0000000180018000     <linker-defined>
+ 0002:00005eb0       __DELAY_IMPORT_DESCRIPTOR_comctl32_dll 0000000180018eb0     comctl32:COMCTL32.dll
+ 0002:00005ed0       __NULL_DELAY_IMPORT_DESCRIPTOR 0000000180018ed0     comctl32:COMCTL32.dll
+ 0002:00005f00       \177COMCTL32_NULL_THUNK_DATA_DLN 0000000180018f00     comctl32:COMCTL32.dll
+ 0002:00005f28       \177COMCTL32_NULL_THUNK_DATA_DLB 0000000180018f28     comctl32:COMCTL32.dll
+ 0002:000060fc       __IMPORT_DESCRIPTOR_x64dbg 00000001800190fc     x64dbg:x64dbg.dll
+ 0002:00006110       __IMPORT_DESCRIPTOR_x64bridge 0000000180019110     x64bridge:x64bridge.dll
+ 0002:00006124       __IMPORT_DESCRIPTOR_KERNEL32 0000000180019124     kernel32:KERNEL32.dll
+ 0002:00006138       __IMPORT_DESCRIPTOR_USER32 0000000180019138     user32:USER32.dll
+ 0002:0000614c       __IMPORT_DESCRIPTOR_GDI32  000000018001914c     gdi32:GDI32.dll
+ 0002:00006160       __IMPORT_DESCRIPTOR_COMDLG32 0000000180019160     comdlg32:COMDLG32.dll
+ 0002:00006174       __IMPORT_DESCRIPTOR_SHELL32 0000000180019174     shell32:SHELL32.dll
+ 0002:00006188       __IMPORT_DESCRIPTOR_ole32  0000000180019188     ole32:ole32.dll
+ 0002:0000619c       __NULL_IMPORT_DESCRIPTOR   000000018001919c     x64dbg:x64dbg.dll
+ 0003:00000150       _fltused                   000000018001b150     minicrt64:dllsupp_x64.obj
+ 0003:00000158       __imp_TaskDialogIndirect   000000018001b158     comctl32:COMCTL32.dll
+ 0003:00000160       __imp_InitCommonControlsEx 000000018001b160     comctl32:COMCTL32.dll
+ 0003:00000168       \177COMCTL32_NULL_THUNK_DATA_DLA 000000018001b168     comctl32:COMCTL32.dll
+ 0003:00000180       __hmod__COMCTL32_dll       000000018001b180     comctl32:COMCTL32.dll
+ 0003:00000188       ?DloadKernel32@@3PEAUHINSTANCE__@@EA 000000018001b188     delayimp:delayhlp.obj
+ 0003:00000190       ?DloadAcquireSRWLockExclusive@@3P6AXPEA_K@ZEA 000000018001b190     delayimp:delayhlp.obj
+ 0003:00000198       ?DloadReleaseSRWLockExclusive@@3P6AXPEA_K@ZEA 000000018001b198     delayimp:delayhlp.obj
+ 0003:000001a0       ?DloadSrwLock@@3_KA        000000018001b1a0     delayimp:delayhlp.obj
+ 0003:000001a8       ?DloadSectionLockCount@@3KA 000000018001b1a8     delayimp:delayhlp.obj
+ 0003:000001ac       ?DloadSectionOldProtection@@3KA 000000018001b1ac     delayimp:delayhlp.obj
+ 0003:000001b0       ?DloadSectionCommitPermanent@@3KA 000000018001b1b0     delayimp:delayhlp.obj
+ 0003:00000770       __@@_PchSym_@00@UfhvihUzwnrmrhgizgliUwvhpglkUxlwvcUnfogrUeIUivovzhvUivovzhvPcGEwytUcGEUhgwzucOlyq@4B2008FD98C1DD4 000000018001b770     <common>
+ 0003:00000778       hwollymain                 000000018001b778     <common>
+ 0003:00000780       hDllInst                   000000018001b780     <common>
+ 0003:000007a0       options                    000000018001b7a0     <common>
+
+ entry point at        0001:00007600
+
+ Static symbols
+
+ 0001:00000064       strtoxl                    0000000180001064 f   minicrt64:string.obj
+ 0001:000002a0       DoCustomStyling            00000001800012a0 f   assembler_dlg.obj
+ 0001:00000e20       RefreshAllWordHighlights   0000000180001e20 f   assembler_dlg.obj
+ 0001:000010c0       DlgAsmProc                 00000001800020c0 f   assembler_dlg.obj
+ 0001:0000350c       $LN393                     000000018000450c     assembler_dlg.obj
+ 0001:00003530       $LN392                     0000000180004530     assembler_dlg.obj
+ 0001:000035b4       $LN391                     00000001800045b4     assembler_dlg.obj
+ 0001:0000360c       $LN390                     000000018000460c     assembler_dlg.obj
+ 0001:00003630       SetScintillaDesign         0000000180004630 f   assembler_dlg.obj
+ 0001:00004470       LoadWindowPos              0000000180005470 f   assembler_dlg.obj
+ 0001:000048e0       ChildRelativeDeferWindowPos 00000001800058e0 f   assembler_dlg.obj
+ 0001:000049a0       AsmDlgMessageBox           00000001800059a0 f   assembler_dlg.obj
+ 0001:00004ac0       DoFindCustom               0000000180005ac0 f   assembler_dlg.obj
+ 0001:00004c30       ScintillaSubclassProc      0000000180005c30 f   assembler_dlg.obj
+ 0001:000072e0       FindTabByLabel             00000001800082e0 f   assembler_dlg_tabs.obj
+ 0001:00007390       WriteIntToPrivateIni       0000000180008390 f   assembler_dlg_tabs.obj
+ 0001:00007460       MakeSureDirectoryExists    0000000180008460 f   assembler_dlg_tabs.obj
+ 0001:00008c90       $LN47                      0000000180009c90     main_x64dbg.obj
+ 0001:00008cb0       DisassembleSelection       0000000180009cb0 f   main_x64dbg.obj
+ 0001:00008d10       CmdShow                    0000000180009d10 f   main_x64dbg.obj
+ 0001:00008d40       CmdDisasmSelection         0000000180009d40 f   main_x64dbg.obj
+ 0001:00008d80       CmdClose                   0000000180009d80 f   main_x64dbg.obj
+ 0001:00008e40       DlgOptionsProc             0000000180009e40 f   options_dlg.obj
+ 0001:0000978c       $LN53                      000000018000a78c     options_dlg.obj
+ 0001:000097f0       OptionsToDlg               000000018000a7f0 f   options_dlg.obj
+ 0001:00009a10       OptionsToIni               000000018000aa10 f   options_dlg.obj
+ 0001:0000a830       ProcessCommand             000000018000b830 f   read_asm.obj
+ 0001:0000aa90       ProcessExternalCode        000000018000ba90 f   read_asm.obj
+ 0001:0000ad00       CreateAndSetLabels         000000018000bd00 f   read_asm.obj
+ 0001:0000b0e0       MakeText                   000000018000c0e0 f   read_asm.obj
+ 0001:0000b520       CopyCommand                000000018000c520 f   read_asm.obj
+ 0001:0000b7f0       ReplaceAddressWithText     000000018000c7f0 f   read_asm.obj
+ 0001:0000bb60       SkipCommandName            000000018000cb60 f   read_asm.obj
+ 0001:0000bd30       TabCtrlSubclassProc        000000018000cd30 f   tabctrl_ex.obj
+ 0001:0000c774       $LN116                     000000018000d774     tabctrl_ex.obj
+ 0001:0000c7d0       TabStripScroll             000000018000d7d0 f   tabctrl_ex.obj
+ 0001:0000c8c0       EditCtrlSubclassProc       000000018000d8c0 f   tabctrl_ex.obj
+ 0001:0000c9b0       EditLabelMouseProc         000000018000d9b0 f   tabctrl_ex.obj
+ 0001:0000d410       TextToData                 000000018000e410 f   write_asm.obj
+ 0001:0000d850       LabelToData                000000018000e850 f   write_asm.obj
+ 0001:0000da50       SpecialCommandToData       000000018000ea50 f   write_asm.obj
+ 0001:0000dd60       ParseAddress               000000018000ed60 f   write_asm.obj
+ 0001:0000e330       ParseLabel                 000000018000f330 f   write_asm.obj
+ 0001:0000e6b0       ParseAsciiString           000000018000f6b0 f   write_asm.obj
+ 0001:0000eaa8       $LN127                     000000018000faa8     write_asm.obj
+ 0001:0000eab4       $LN126                     000000018000fab4     write_asm.obj
+ 0001:0000eb0c       $LN125                     000000018000fb0c     write_asm.obj
+ 0001:0000eb38       $LN124                     000000018000fb38     write_asm.obj
+ 0001:0000eb90       ParseUnicodeString         000000018000fb90 f   write_asm.obj
+ 0001:0000f180       $LN130                     0000000180010180     write_asm.obj
+ 0001:0000f18c       $LN129                     000000018001018c     write_asm.obj
+ 0001:0000f1e4       $LN128                     00000001800101e4     write_asm.obj
+ 0001:0000f210       $LN127                     0000000180010210     write_asm.obj
+ 0001:0000f270       ParseCommand               0000000180010270 f   write_asm.obj
+ 0001:0000f5e0       ResolveCommand             00000001800105e0 f   write_asm.obj
+ 0001:0000f8f0       ReplaceLabelsWithFooAddress 00000001800108f0 f   write_asm.obj
+ 0001:0000fc20       ParseAlignSpecialCommand   0000000180010c20 f   write_asm.obj
+ 0001:0000fe00       ParsePadSpecialCommand     0000000180010e00 f   write_asm.obj
+ 0001:0000ffd0       ParseRVAAddress            0000000180010fd0 f   write_asm.obj
+ 0001:00010490       ReplaceLabelsFromList      0000000180011490 f   write_asm.obj
+ 0001:000109e0       ReplacedTextCorrectErrorSpot 00000001800119e0 f   write_asm.obj
+ 0001:00010b80       FindCodeCave               0000000180011b80 f   write_asm.obj
+ 0001:00010fbc       ??$GuardedWrite@V<lambda_1>@?1??__delayLoadHelper2@@YAP6A_JXZPEBUImgDelayDescr@@PEAP6A_JXZ@Z@@@YAXPEAX_KV<lambda_1>@?1??__delayLoadHelper2@@YAP6A_JXZPEBUImgDelayDescr@@PEAP6A_JXZ@Z@@Z 0000000180011fbc f   delayimp:delayhlp.obj
+ 0001:000117f0       $$000000                   00000001800127f0     odbccp32:guard_dispatch.obj
+ 0002:00005260       $unwind$DoCustomStyling    0000000180018260     assembler_dlg.obj
+ 0002:0000526c       $chain$3$DoCustomStyling   000000018001826c     assembler_dlg.obj
+ 0002:0000528c       $chain$5$DoCustomStyling   000000018001828c     assembler_dlg.obj
+ 0002:000052a4       $chain$6$DoCustomStyling   00000001800182a4     assembler_dlg.obj
+ 0002:000052b4       $chain$7$DoCustomStyling   00000001800182b4     assembler_dlg.obj
+ 0002:000052c4       $unwind$RefreshAllWordHighlights 00000001800182c4     assembler_dlg.obj
+ 0002:000052cc       $chain$0$RefreshAllWordHighlights 00000001800182cc     assembler_dlg.obj
+ 0002:000052e0       $chain$1$RefreshAllWordHighlights 00000001800182e0     assembler_dlg.obj
+ 0002:000052f0       $unwind$AsmDlgMessageBox   00000001800182f0     assembler_dlg.obj
+ 0002:000052f0       $unwind$AssemblerShowDlg   00000001800182f0     assembler_dlg.obj
+ 0002:000052f0       $unwind$AboutMessageBoxCallback 00000001800182f0     main_common.obj
+ 0002:000052f0       $unwind$plugsetup          00000001800182f0     main_x64dbg.obj
+ 0002:000052f8       $unwind$DlgAsmProc         00000001800182f8     assembler_dlg.obj
+ 0002:00005318       $unwind$SetScintillaDesign 0000000180018318     assembler_dlg.obj
+ 0002:00005328       $chain$0$SetScintillaDesign 0000000180018328     assembler_dlg.obj
+ 0002:0000533c       $chain$4$SetScintillaDesign 000000018001833c     assembler_dlg.obj
+ 0002:0000535c       $chain$5$SetScintillaDesign 000000018001835c     assembler_dlg.obj
+ 0002:00005370       $chain$6$SetScintillaDesign 0000000180018370     assembler_dlg.obj
+ 0002:00005384       $chain$7$SetScintillaDesign 0000000180018384     assembler_dlg.obj
+ 0002:00005394       $unwind$LoadWindowPos      0000000180018394     assembler_dlg.obj
+ 0002:000053b4       $unwind$ChildRelativeDeferWindowPos 00000001800183b4     assembler_dlg.obj
+ 0002:000053c8       $chain$4$AsmDlgMessageBox  00000001800183c8     assembler_dlg.obj
+ 0002:000053ec       $chain$5$AsmDlgMessageBox  00000001800183ec     assembler_dlg.obj
+ 0002:000053fc       $unwind$DoFindCustom       00000001800183fc     assembler_dlg.obj
+ 0002:00005418       $unwind$ScintillaSubclassProc 0000000180018418     assembler_dlg.obj
+ 0002:00005430       $unwind$InitTabs           0000000180018430     assembler_dlg_tabs.obj
+ 0002:00005448       $unwind$InitLoadTabs       0000000180018448     assembler_dlg_tabs.obj
+ 0002:00005468       $unwind$SyncTabs           0000000180018468     assembler_dlg_tabs.obj
+ 0002:00005484       $chain$1$SyncTabs          0000000180018484     assembler_dlg_tabs.obj
+ 0002:00005498       $chain$2$SyncTabs          0000000180018498     assembler_dlg_tabs.obj
+ 0002:000054a8       $unwind$NewTab             00000001800184a8     assembler_dlg_tabs.obj
+ 0002:000054b4       $chain$4$NewTab            00000001800184b4     assembler_dlg_tabs.obj
+ 0002:000054d8       $chain$6$NewTab            00000001800184d8     assembler_dlg_tabs.obj
+ 0002:000054f0       $chain$7$NewTab            00000001800184f0     assembler_dlg_tabs.obj
+ 0002:00005500       $chain$8$NewTab            0000000180018500     assembler_dlg_tabs.obj
+ 0002:00005510       $unwind$CloseTabByIndex    0000000180018510     assembler_dlg_tabs.obj
+ 0002:00005530       $unwind$OnTabChanged       0000000180018530     assembler_dlg_tabs.obj
+ 0002:0000553c       $unwind$TabRenameEnd       000000018001853c     assembler_dlg_tabs.obj
+ 0002:00005554       $chain$0$TabRenameEnd      0000000180018554     assembler_dlg_tabs.obj
+ 0002:00005568       $chain$1$TabRenameEnd      0000000180018568     assembler_dlg_tabs.obj
+ 0002:00005578       $unwind$LoadFileOfTab      0000000180018578     assembler_dlg_tabs.obj
+ 0002:00005594       $unwind$SaveFileOfTab      0000000180018594     assembler_dlg_tabs.obj
+ 0002:000055ac       $chain$2$SaveFileOfTab     00000001800185ac     assembler_dlg_tabs.obj
+ 0002:000055c0       $chain$3$SaveFileOfTab     00000001800185c0     assembler_dlg_tabs.obj
+ 0002:000055d0       $unwind$LoadFileFromLibrary 00000001800185d0     assembler_dlg_tabs.obj
+ 0002:000055e4       $chain$0$LoadFileFromLibrary 00000001800185e4     assembler_dlg_tabs.obj
+ 0002:000055f8       $chain$1$LoadFileFromLibrary 00000001800185f8     assembler_dlg_tabs.obj
+ 0002:0000560c       $chain$2$LoadFileFromLibrary 000000018001860c     assembler_dlg_tabs.obj
+ 0002:00005620       $chain$3$LoadFileFromLibrary 0000000180018620     assembler_dlg_tabs.obj
+ 0002:00005630       $chain$4$LoadFileFromLibrary 0000000180018630     assembler_dlg_tabs.obj
+ 0002:00005640       $chain$5$LoadFileFromLibrary 0000000180018640     assembler_dlg_tabs.obj
+ 0002:00005650       $unwind$FindTabByLabel     0000000180018650     assembler_dlg_tabs.obj
+ 0002:00005668       $unwind$WriteIntToPrivateIni 0000000180018668     assembler_dlg_tabs.obj
+ 0002:00005668       $unwind$MyWriteinttoini    0000000180018668     plugin_x64dbg.obj
+ 0002:00005678       $unwind$MakeSureDirectoryExists 0000000180018678     assembler_dlg_tabs.obj
+ 0002:0000568c       $unwind$DllMain            000000018001868c     main_common.obj
+ 0002:0000568c       $unwind$?DloadAcquireSectionWriteAccess@@YAXXZ 000000018001868c     delayimp:delayhlp.obj
+ 0002:00005694       $unwind$PluginInit         0000000180018694     main_common.obj
+ 0002:000056a8       $chain$0$plugsetup         00000001800186a8     main_x64dbg.obj
+ 0002:000056bc       $chain$1$plugsetup         00000001800186bc     main_x64dbg.obj
+ 0002:000056cc       $unwind$pluginit           00000001800186cc     main_x64dbg.obj
+ 0002:000056e0       $unwind$CmdClose           00000001800186e0     main_x64dbg.obj
+ 0002:000056e0       $unwind$CmdDisasmSelection 00000001800186e0     main_x64dbg.obj
+ 0002:000056e0       $unwind$CmdShow            00000001800186e0     main_x64dbg.obj
+ 0002:000056e0       $unwind$plugstop           00000001800186e0     main_x64dbg.obj
+ 0002:000056e0       $unwind$?DloadReleaseSectionWriteAccess@@YAXXZ 00000001800186e0     delayimp:delayhlp.obj
+ 0002:000056e8       $unwind$CBWINEVENT         00000001800186e8     main_x64dbg.obj
+ 0002:000056f0       $chain$0$CBWINEVENT        00000001800186f0     main_x64dbg.obj
+ 0002:00005704       $chain$2$CBWINEVENT        0000000180018704     main_x64dbg.obj
+ 0002:0000571c       $chain$3$CBWINEVENT        000000018001871c     main_x64dbg.obj
+ 0002:0000572c       $chain$4$CBWINEVENT        000000018001872c     main_x64dbg.obj
+ 0002:0000573c       $unwind$CBMENUENTRY        000000018001873c     main_x64dbg.obj
+ 0002:00005744       $chain$1$CBMENUENTRY       0000000180018744     main_x64dbg.obj
+ 0002:0000575c       $chain$2$CBMENUENTRY       000000018001875c     main_x64dbg.obj
+ 0002:00005770       $chain$3$CBMENUENTRY       0000000180018770     main_x64dbg.obj
+ 0002:00005780       $chain$4$CBMENUENTRY       0000000180018780     main_x64dbg.obj
+ 0002:00005790       $chain$5$CBMENUENTRY       0000000180018790     main_x64dbg.obj
+ 0002:000057a8       $unwind$DisassembleSelection 00000001800187a8     main_x64dbg.obj
+ 0002:000057b0       $chain$1$DisassembleSelection 00000001800187b0     main_x64dbg.obj
+ 0002:000057c8       $chain$2$DisassembleSelection 00000001800187c8     main_x64dbg.obj
+ 0002:000057d8       $unwind$ShowOptionsDlg     00000001800187d8     options_dlg.obj
+ 0002:000057e4       $unwind$DlgOptionsProc     00000001800187e4     options_dlg.obj
+ 0002:000057f4       $chain$0$DlgOptionsProc    00000001800187f4     options_dlg.obj
+ 0002:00005808       $chain$2$DlgOptionsProc    0000000180018808     options_dlg.obj
+ 0002:0000581c       $chain$3$DlgOptionsProc    000000018001881c     options_dlg.obj
+ 0002:00005830       $chain$4$DlgOptionsProc    0000000180018830     options_dlg.obj
+ 0002:00005840       $chain$5$DlgOptionsProc    0000000180018840     options_dlg.obj
+ 0002:00005850       $unwind$OptionsToDlg       0000000180018850     options_dlg.obj
+ 0002:0000585c       $unwind$OptionsToIni       000000018001885c     options_dlg.obj
+ 0002:00005868       $unwind$MyGetColorfromini  0000000180018868     plugin_x64dbg.obj
+ 0002:0000587c       $unwind$ReadAsm            000000018001887c     read_asm.obj
+ 0002:00005898       $unwind$ProcessCommand     0000000180018898     read_asm.obj
+ 0002:000058ac       $unwind$ProcessExternalCode 00000001800188ac     read_asm.obj
+ 0002:000058c8       $unwind$CreateAndSetLabels 00000001800188c8     read_asm.obj
+ 0002:000058e4       $unwind$MakeText           00000001800188e4     read_asm.obj
+ 0002:00005900       $unwind$CopyCommand        0000000180018900     read_asm.obj
+ 0002:00005900       $unwind$TabStripScroll     0000000180018900     tabctrl_ex.obj
+ 0002:00005918       $unwind$ReplaceAddressWithText 0000000180018918     read_asm.obj
+ 0002:0000592c       $chain$0$ReplaceAddressWithText 000000018001892c     read_asm.obj
+ 0002:00005940       $chain$2$ReplaceAddressWithText 0000000180018940     read_asm.obj
+ 0002:00005954       $chain$3$ReplaceAddressWithText 0000000180018954     read_asm.obj
+ 0002:00005964       $unwind$TabCtrlSubclassProc 0000000180018964     tabctrl_ex.obj
+ 0002:00005984       $unwind$EditCtrlSubclassProc 0000000180018984     tabctrl_ex.obj
+ 0002:00005998       $unwind$EditLabelMouseProc 0000000180018998     tabctrl_ex.obj
+ 0002:000059a8       $unwind$WriteAsm           00000001800189a8     write_asm.obj
+ 0002:000059c0       $unwind$TextToData         00000001800189c0     write_asm.obj
+ 0002:000059d8       $unwind$LabelToData        00000001800189d8     write_asm.obj
+ 0002:000059ec       $chain$1$LabelToData       00000001800189ec     write_asm.obj
+ 0002:00005a00       $unwind$SpecialCommandToData 0000000180018a00     write_asm.obj
+ 0002:00005a10       $chain$3$SpecialCommandToData 0000000180018a10     write_asm.obj
+ 0002:00005a30       $chain$5$SpecialCommandToData 0000000180018a30     write_asm.obj
+ 0002:00005a50       $chain$6$SpecialCommandToData 0000000180018a50     write_asm.obj
+ 0002:00005a60       $unwind$ParseAddress       0000000180018a60     write_asm.obj
+ 0002:00005a80       $unwind$ParseLabel         0000000180018a80     write_asm.obj
+ 0002:00005a8c       $chain$4$ParseLabel        0000000180018a8c     write_asm.obj
+ 0002:00005ab0       $chain$5$ParseLabel        0000000180018ab0     write_asm.obj
+ 0002:00005ac4       $chain$6$ParseLabel        0000000180018ac4     write_asm.obj
+ 0002:00005ad4       $chain$8$ParseLabel        0000000180018ad4     write_asm.obj
+ 0002:00005afc       $chain$9$ParseLabel        0000000180018afc     write_asm.obj
+ 0002:00005b14       $unwind$ParseAsciiString   0000000180018b14     write_asm.obj
+ 0002:00005b20       $chain$3$ParseAsciiString  0000000180018b20     write_asm.obj
+ 0002:00005b40       $chain$4$ParseAsciiString  0000000180018b40     write_asm.obj
+ 0002:00005b54       $chain$5$ParseAsciiString  0000000180018b54     write_asm.obj
+ 0002:00005b68       $chain$6$ParseAsciiString  0000000180018b68     write_asm.obj
+ 0002:00005b78       $chain$7$ParseAsciiString  0000000180018b78     write_asm.obj
+ 0002:00005b88       $chain$9$ParseAsciiString  0000000180018b88     write_asm.obj
+ 0002:00005bb0       $chain$10$ParseAsciiString 0000000180018bb0     write_asm.obj
+ 0002:00005bd0       $unwind$ParseUnicodeString 0000000180018bd0     write_asm.obj
+ 0002:00005bdc       $chain$0$ParseUnicodeString 0000000180018bdc     write_asm.obj
+ 0002:00005bf0       $chain$5$ParseUnicodeString 0000000180018bf0     write_asm.obj
+ 0002:00005c10       $chain$6$ParseUnicodeString 0000000180018c10     write_asm.obj
+ 0002:00005c24       $chain$7$ParseUnicodeString 0000000180018c24     write_asm.obj
+ 0002:00005c38       $chain$8$ParseUnicodeString 0000000180018c38     write_asm.obj
+ 0002:00005c48       $chain$9$ParseUnicodeString 0000000180018c48     write_asm.obj
+ 0002:00005c58       $chain$10$ParseUnicodeString 0000000180018c58     write_asm.obj
+ 0002:00005c68       $unwind$ParseCommand       0000000180018c68     write_asm.obj
+ 0002:00005c78       $chain$3$ParseCommand      0000000180018c78     write_asm.obj
+ 0002:00005c98       $chain$4$ParseCommand      0000000180018c98     write_asm.obj
+ 0002:00005ca8       $unwind$ResolveCommand     0000000180018ca8     write_asm.obj
+ 0002:00005cc4       $unwind$ReplaceLabelsWithFooAddress 0000000180018cc4     write_asm.obj
+ 0002:00005ce0       $unwind$ParseAlignSpecialCommand 0000000180018ce0     write_asm.obj
+ 0002:00005cf4       $chain$0$ParseAlignSpecialCommand 0000000180018cf4     write_asm.obj
+ 0002:00005d08       $chain$1$ParseAlignSpecialCommand 0000000180018d08     write_asm.obj
+ 0002:00005d18       $unwind$ParsePadSpecialCommand 0000000180018d18     write_asm.obj
+ 0002:00005d2c       $unwind$ParseRVAAddress    0000000180018d2c     write_asm.obj
+ 0002:00005d50       $unwind$ReplaceLabelsFromList 0000000180018d50     write_asm.obj
+ 0002:00005d64       $chain$1$ReplaceLabelsFromList 0000000180018d64     write_asm.obj
+ 0002:00005d7c       $chain$2$ReplaceLabelsFromList 0000000180018d7c     write_asm.obj
+ 0002:00005d7c       $chain$6$ReplaceLabelsFromList 0000000180018d7c     write_asm.obj
+ 0002:00005d8c       $chain$3$ReplaceLabelsFromList 0000000180018d8c     write_asm.obj
+ 0002:00005d8c       $chain$5$ReplaceLabelsFromList 0000000180018d8c     write_asm.obj
+ 0002:00005da4       $unwind$ReplacedTextCorrectErrorSpot 0000000180018da4     write_asm.obj
+ 0002:00005dac       $chain$1$ReplacedTextCorrectErrorSpot 0000000180018dac     write_asm.obj
+ 0002:00005dc4       $chain$3$ReplacedTextCorrectErrorSpot 0000000180018dc4     write_asm.obj
+ 0002:00005ddc       $chain$4$ReplacedTextCorrectErrorSpot 0000000180018ddc     write_asm.obj
+ 0002:00005dec       $unwind$FindCodeCave       0000000180018dec     write_asm.obj
+ 0002:00005e10       xdata                      0000000180018e10     comctl32:COMCTL32.dll
+ 0002:00005e18       $unwind$strtoxl            0000000180018e18     minicrt64:string.obj
+ 0002:00005e2c       $unwind$?DloadGetSRWLockFunctionPointers@@YAEXZ 0000000180018e2c     delayimp:delayhlp.obj
+ 0002:00005e38       $unwind$?DloadObtainSection@@YAPEAXPEAK0@Z 0000000180018e38     delayimp:delayhlp.obj
+ 0002:00005e48       $unwind$?DloadMakePermanentImageCommit@@YAXPEAX_K@Z 0000000180018e48     delayimp:delayhlp.obj
+ 0002:00005e54       $unwind$?DloadProtectSection@@YAXPEAX_KKPEAK@Z 0000000180018e54     delayimp:delayhlp.obj
+ 0002:00005e6c       $unwind$__delayLoadHelper2 0000000180018e6c     delayimp:delayhlp.obj
+ 0002:00005e88       $unwind$??$GuardedWrite@V<lambda_1>@?1??__delayLoadHelper2@@YAP6A_JXZPEBUImgDelayDescr@@PEAP6A_JXZ@Z@@@YAXPEAX_KV<lambda_1>@?1??__delayLoadHelper2@@YAP6A_JXZPEBUImgDelayDescr@@PEAP6A_JXZ@Z@@Z 0000000180018e88     delayimp:delayhlp.obj
+ 0002:00005ea0       $xdatasym$_guard_dispatch_icall_nop 0000000180018ea0     odbccp32:guard_dispatch.obj
+ 0002:00005ea8       $unwind$memset             0000000180018ea8     minicrt64:memory.obj
+ 0002:00006040       .edata                     0000000180019040     multiasm_x64dbg.exp
+ 0002:00006068       rgpv                       0000000180019068     multiasm_x64dbg.exp
+ 0002:00006080       rgszName                   0000000180019080     multiasm_x64dbg.exp
+ 0002:00006098       rgwOrd                     0000000180019098     multiasm_x64dbg.exp
+ 0002:000060a4       szName                     00000001800190a4     multiasm_x64dbg.exp
+ 0002:000060b9       $N00001                    00000001800190b9     multiasm_x64dbg.exp
+ 0002:000060c5       $N00002                    00000001800190c5     multiasm_x64dbg.exp
+ 0002:000060d0       $N00003                    00000001800190d0     multiasm_x64dbg.exp
+ 0002:000060df       $N00004                    00000001800190df     multiasm_x64dbg.exp
+ 0002:000060e8       $N00005                    00000001800190e8     multiasm_x64dbg.exp
+ 0002:000060f2       $N00006                    00000001800190f2     multiasm_x64dbg.exp
+ 0002:000067b4       .idata$6                   00000001800197b4     x64dbg:x64dbg.dll
+ 0002:000068ec       .idata$6                   00000001800198ec     x64bridge:x64bridge.dll
+ 0002:00006ba4       .idata$6                   0000000180019ba4     kernel32:KERNEL32.dll
+ 0002:00007096       .idata$6                   000000018001a096     user32:USER32.dll
+ 0002:000070c2       .idata$6                   000000018001a0c2     gdi32:GDI32.dll
+ 0002:00007146       .idata$6                   000000018001a146     comdlg32:COMDLG32.dll
+ 0002:00007174       .idata$6                   000000018001a174     shell32:SHELL32.dll
+ 0002:000071a2       .idata$6                   000000018001a1a2     ole32:ole32.dll
+ 0003:00000000       ?spaces@?1??isspace@@9@9   000000018001b000     minicrt64:string.obj
+ 0003:00000100       s_backupSelStart           000000018001b100     assembler_dlg.obj
+ 0003:00000104       s_backupSelEnd             000000018001b104     assembler_dlg.obj
+ 0003:00000110       ?acrCustColors@?1??ChooseColor_Dlg@@9@9 000000018001b110     options_dlg.obj
+ 0003:000001c0       hAccelerators              000000018001b1c0     assembler_dlg.obj
+ 0003:000001c8       hAsmDlg                    000000018001b1c8     assembler_dlg.obj
+ 0003:000001d0       AsmDlgParam                000000018001b1d0     assembler_dlg.obj
+ 0003:00000370       wpOrigScintillaProc        000000018001b370     assembler_dlg.obj
+ 0003:00000378       bInStyling                 000000018001b378     assembler_dlg.obj
+ 0003:0000037c       ?s_bInterceptRButton@?1??ScintillaSubclassProc@@9@9 000000018001b37c     assembler_dlg.obj
+ 0003:00000380       hPostErrorWnd              000000018001b380     assembler_dlg_tabs.obj
+ 0003:00000388       uPostErrorMsg              000000018001b388     assembler_dlg_tabs.obj
+ 0003:0000038c       nTabsCreatedCounter        000000018001b38c     assembler_dlg_tabs.obj
+ 0003:00000390       szTabFilesPath             000000018001b390     assembler_dlg_tabs.obj
+ 0003:00000494       pluginHandle               000000018001b494     main_x64dbg.obj
+ 0003:00000498       hMenu                      000000018001b498     main_x64dbg.obj
+ 0003:0000049c       hMenuDisasm                000000018001b49c     main_x64dbg.obj
+ 0003:000004a0       szConfigFilePath           000000018001b4a0     assembler_dlg_tabs.obj
+ 0003:000005b0       szLibraryFilePath          000000018001b5b0     assembler_dlg_tabs.obj
+ 0003:000006b8       ftConfigLastWriteTime      000000018001b6b8     assembler_dlg_tabs.obj
+ 0003:000006c0       ftCurrentTabLastWriteTime  000000018001b6c0     assembler_dlg_tabs.obj
+ 0003:000006c8       hScintillaDLL              000000018001b6c8     main_common.obj
+ 0003:000006d0       temp_options               000000018001b6d0     options_dlg.obj
+ 0003:00000750       g_hEditingTabCtrlWnd       000000018001b750     tabctrl_ex.obj
+ 0003:00000758       g_hEditCtrlWnd             000000018001b758     tabctrl_ex.obj
+ 0003:00000760       g_pOldEditCtrlProc         000000018001b760     tabctrl_ex.obj
+ 0003:00000768       g_hLabelEditMouseHook      000000018001b768     tabctrl_ex.obj
+ 0005:00000260       $R000000                   000000018001d260     rsrc.res
+ 0005:000006c8       $R000468                   000000018001d6c8     rsrc.res
+ 0005:00001770       $R001510                   000000018001e770     rsrc.res
+ 0005:00003d18       $R003AB8                   0000000180020d18     rsrc.res
+ 0005:00003d48       $R003AE8                   0000000180020d48     rsrc.res
+ 0005:00003df0       $R003B90                   0000000180020df0     rsrc.res
+ 0005:00004120       $R003EC0                   0000000180021120     rsrc.res
+ 0005:00004268       $R004008                   0000000180021268     rsrc.res
+ 0005:00004990       $R004730                   0000000180021990     rsrc.res

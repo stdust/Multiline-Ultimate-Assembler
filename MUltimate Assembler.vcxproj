@@ -256,7 +256,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;raeditlib\masm32.lib;x64dbg_pluginsdk\x32dbg.lib;x64dbg_pluginsdk\x32bridge.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;x64dbg_pluginsdk\x32dbg.lib;x64dbg_pluginsdk\x32bridge.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <GenerateMapFile>true</GenerateMapFile>
@@ -315,7 +315,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;raeditlib\masm32.lib;ollydbglib\ollydbg.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;ollydbglib\ollydbg.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <GenerateMapFile>true</GenerateMapFile>
@@ -377,7 +377,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;raeditlib\masm32.lib;x64dbg_pluginsdk\x32dbg.lib;x64dbg_pluginsdk\x32bridge.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;x64dbg_pluginsdk\x32dbg.lib;x64dbg_pluginsdk\x32bridge.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <GenerateMapFile>true</GenerateMapFile>
@@ -439,7 +439,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;raeditlib\masm32.lib;ollydbglib\ollydbg2.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;ollydbglib\ollydbg2.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <GenerateMapFile>true</GenerateMapFile>
@@ -501,7 +501,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EntryPointSymbol>DllMain</EntryPointSymbol>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;raeditlib\masm32.lib;ollydbglib\immdbg.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>delayimp.lib;comctl32.lib;shlwapi.lib;minicrt\minicrt.lib;ollydbglib\immdbg.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
       <GenerateMapFile>true</GenerateMapFile>
@@ -613,7 +613,7 @@
     <ClInclude Include="plugin_odbg_v2.h" />
     <ClInclude Include="plugin_x64dbg.h" />
     <ClInclude Include="pointer_redirection.h" />
-    <ClInclude Include="raedit.h" />
+
     <ClInclude Include="read_asm.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />

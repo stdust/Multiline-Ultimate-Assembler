@@ -77,9 +77,7 @@
     <ClInclude Include="plugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raedit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+
     <ClInclude Include="read_asm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
