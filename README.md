@@ -4,6 +4,8 @@ This is a modified version of the original **[Multiline Ultimate Assembler](http
 
 It resolves several long-standing usability issues, including Korean IME (Input Method Editor) input bugs and syntax highlighting improvements.
 
+![Preview](rsrc_files/preview.png)
+
 ---
 
 ## 🚀 Key Improvements & Fixes
