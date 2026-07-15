@@ -4,7 +4,7 @@ This is a modified version of the original **[Multiline Ultimate Assembler](http
 
 It resolves several long-standing usability issues, including Korean IME (Input Method Editor) input bugs and syntax highlighting improvements.
 
-<img src="rsrc_files/preview.png" width="736" height="786" alt="Preview" />
+<img src="rsrc_files/preview.png" width="500" height="534" alt="Preview" />
 
 ---
 
