@@ -22,6 +22,7 @@ It resolves several long-standing usability issues, including Korean IME (Input 
   * **`RET` family**: Marked boundaries (`SCE_ASM_RET`) for return execution.
   * **`NOP` family**: Dimmed gray color (`SCE_ASM_NOP`) for clear patch identification.
   * Optimized rendering routines to completely eliminate editor flickering during dynamic custom styling repaints.
+  * 💡 **Customization Note**: You can freely customize all editor colors by editing the **`multiasm.ini`** file (에디터의 모든 구문 강조 색상은 **`multiasm.ini`** 파일을 직접 수정하여 사용자가 원하는 색상으로 언제든지 자유롭게 변경이 가능합니다).
 
 ---
 
