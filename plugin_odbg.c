@@ -1,0 +1,759 @@
+#include "stdafx.h"
+#include "plugin.h"
+
+HWND hwollymain;
+
+static int FixAsmCommand(char *lpCommand, char **ppFixedCommand, char *lpError);
+static char *SkipCommandName(char *p);
+static int FixedAsmCorrectErrorSpot(char *lpCommand, char *pFixedCommand, int result);
+static BOOL FindNextHexNumberStartingWithALetter(char *lpCommand, char **ppHexNumberStart, char **ppHexNumberEnd);
+
+// Config functions using standard Windows API to read/write custom multiasm.ini directly
+
+static void GetIniFilePath(HINSTANCE dllinst, TCHAR *pszIniPath)
+{
+	GetModuleFileName(dllinst, pszIniPath, MAX_PATH);
+	TCHAR *p = _tcsrchr(pszIniPath, _T('\\'));
+	if (p) {
+		_tcscpy(p + 1, _T("multiasm.ini"));
+	} else {
+		_tcscpy(pszIniPath, _T("multiasm.ini"));
+	}
+}
+
+BOOL MyGetintfromini(HINSTANCE dllinst, TCHAR *key, int *p_val, int min, int max, int def)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	TCHAR szBuffer[64];
+	GetPrivateProfileString(_T("Multiline Ultimate Assembler"), key, _T(""), szBuffer, 64, szIniPath);
+
+	if (szBuffer[0] == _T('\0'))
+	{
+		*p_val = def;
+		return FALSE;
+	}
+
+	int val = (int)_tcstoul(szBuffer, NULL, 0);
+
+	if (min && max && (val < min || val > max))
+		*p_val = def;
+	else
+		*p_val = val;
+
+	return TRUE;
+}
+
+BOOL MyWriteinttoini(HINSTANCE dllinst, TCHAR *key, int val)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	TCHAR szBuffer[64];
+	wsprintf(szBuffer, val > 65535 ? _T("0x%08X") : _T("%d"), val);
+
+	return WritePrivateProfileString(_T("Multiline Ultimate Assembler"), key, szBuffer, szIniPath) != 0;
+}
+
+int MyGetstringfromini(HINSTANCE dllinst, TCHAR *key, TCHAR *s, int length)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	return (int)GetPrivateProfileString(_T("Multiline Ultimate Assembler"), key, _T(""), s, length, szIniPath);
+}
+
+BOOL MyWritestringtoini(HINSTANCE dllinst, TCHAR *key, TCHAR *s)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	return WritePrivateProfileString(_T("Multiline Ultimate Assembler"), key, s, szIniPath) != 0;
+}
+
+// Assembler functions
+
+DWORD SimpleDisasm(BYTE *cmd, SIZE_T cmdsize, DWORD_PTR ip, BYTE *dec, BOOL bSizeOnly,
+	TCHAR *pszResult, DWORD_PTR *jmpconst, DWORD_PTR *adrconst, DWORD_PTR *immconst)
+{
+	t_disasm disasm;
+	DWORD dwCommandSize = Disasm(cmd, cmdsize, ip, dec, &disasm, bSizeOnly ? DISASM_SIZE : DISASM_FILE, 0);
+	if(disasm.error)
+		return 0;
+
+	if(!bSizeOnly)
+	{
+		lstrcpy(pszResult, disasm.result); // pszResult should have at least COMMAND_MAX_LEN chars
+
+		*jmpconst = disasm.jmpconst;
+		*adrconst = disasm.adrconst;
+		*immconst = disasm.immconst;
+	}
+
+	return dwCommandSize;
+}
+
+int AssembleShortest(TCHAR *lpCommand, DWORD_PTR dwAddress, BYTE *bBuffer, TCHAR *lpError)
+{
+	char *lpFixedCommand, *lpCommandToAssemble;
+	t_asmmodel model1, model2;
+	t_asmmodel *pm, *pm_shortest, *temp;
+	BOOL bHadResults;
+	int attempt;
+	int result;
+	int i;
+
+	result = FixAsmCommand(lpCommand, &lpFixedCommand, lpError);
+	if(result <= 0)
+		return result;
+
+	if(lpFixedCommand)
+		lpCommandToAssemble = lpFixedCommand;
+	else
+		lpCommandToAssemble = lpCommand;
+
+	pm = &model1;
+	pm_shortest = &model2;
+
+	pm_shortest->length = MAXCMDSIZE+1;
+	attempt = 0;
+
+	do
+	{
+		bHadResults = FALSE;
+
+		for(i=0; i<4; i++)
+		{
+			result = Assemble(lpCommandToAssemble, dwAddress, pm, attempt, i, lpError);
+			if(result > 0)
+			{
+				bHadResults = TRUE;
+
+				if(pm->length < pm_shortest->length)
+				{
+					temp = pm_shortest;
+					pm_shortest = pm;
+					pm = temp;
+				}
+			}
+		}
+
+		attempt++;
+	}
+	while(bHadResults);
+
+	if(pm_shortest->length == MAXCMDSIZE+1)
+	{
+		if(lpFixedCommand)
+		{
+			result = FixedAsmCorrectErrorSpot(lpCommand, lpFixedCommand, result);
+			HeapFree(GetProcessHeap(), 0, lpFixedCommand);
+		}
+
+		return result;
+	}
+
+	if(lpFixedCommand)
+		HeapFree(GetProcessHeap(), 0, lpFixedCommand);
+
+	for(i=0; i<pm_shortest->length; i++)
+	{
+		if(pm_shortest->mask[i] != 0xFF)
+		{
+			lstrcpy(lpError, "Undefined operands allowed only for search");
+			return 0;
+		}
+	}
+
+	CopyMemory(bBuffer, pm_shortest->code, pm_shortest->length);
+
+	return pm_shortest->length;
+}
+
+int AssembleWithGivenSize(TCHAR *lpCommand, DWORD_PTR dwAddress, int nReqSize, BYTE *bBuffer, TCHAR *lpError)
+{
+	char *lpFixedCommand, *lpCommandToAssemble;
+	t_asmmodel model;
+	BOOL bHadResults;
+	int attempt;
+	int result;
+	int i;
+
+	result = FixAsmCommand(lpCommand, &lpFixedCommand, lpError);
+	if(result <= 0)
+		return result;
+
+	if(lpFixedCommand)
+		lpCommandToAssemble = lpFixedCommand;
+	else
+		lpCommandToAssemble = lpCommand;
+
+	model.length = MAXCMDSIZE+1;
+
+	attempt = 0;
+
+	do
+	{
+		bHadResults = FALSE;
+
+		for(i=0; i<4; i++)
+		{
+			result = Assemble(lpCommandToAssemble, dwAddress, &model, attempt, i, lpError);
+			if(result > 0)
+			{
+				bHadResults = TRUE;
+
+				if(model.length == nReqSize)
+				{
+					if(lpFixedCommand)
+						HeapFree(GetProcessHeap(), 0, lpFixedCommand);
+
+					for(i=0; i<model.length; i++)
+					{
+						if(model.mask[i] != 0xFF)
+						{
+							lstrcpy(lpError, "Undefined operands allowed only for search");
+							return 0;
+						}
+					}
+
+					CopyMemory(bBuffer, model.code, model.length);
+
+					return model.length;
+				}
+			}
+		}
+
+		attempt++;
+	}
+	while(bHadResults);
+
+	if(lpFixedCommand)
+	{
+		if(result < 0)
+			result = FixedAsmCorrectErrorSpot(lpCommand, lpFixedCommand, result);
+		HeapFree(GetProcessHeap(), 0, lpFixedCommand);
+	}
+
+	if(result > 0)
+	{
+		lstrcpy(lpError, "Assemble error");
+		result = 0;
+	}
+
+	return result;
+}
+
+static int FixAsmCommand(char *lpCommand, char **ppFixedCommand, char *lpError)
+{
+	char *p;
+	char *pHexNumberStart, *pHexNumberEnd;
+	int number_count;
+	char *pNewCommand;
+	char *p_dest;
+
+	// Skip the command name
+	p = SkipCommandName(lpCommand);
+
+	// Search for hex numbers starting with a letter
+	number_count = 0;
+
+	while(FindNextHexNumberStartingWithALetter(p, &pHexNumberStart, &p))
+		number_count++;
+
+	if(number_count == 0)
+	{
+		*ppFixedCommand = NULL;
+		return 1;
+	}
+
+	// Allocate memory for new command
+	pNewCommand = (char *)HeapAlloc(GetProcessHeap(), 0, lstrlen(lpCommand)+number_count+1);
+	if(!pNewCommand)
+	{
+		lstrcpy(lpError, "Allocation failed");
+		return 0;
+	}
+
+	// Fix (add zeros)
+	p_dest = pNewCommand;
+
+	// Skip the command name
+	p = SkipCommandName(lpCommand);
+	if(p != lpCommand)
+	{
+		CopyMemory(p_dest, lpCommand, p-lpCommand);
+		p_dest += p-lpCommand;
+	}
+
+	while(FindNextHexNumberStartingWithALetter(p, &pHexNumberStart, &pHexNumberEnd))
+	{
+		CopyMemory(p_dest, p, pHexNumberStart-p);
+		p_dest += pHexNumberStart-p;
+
+		*p_dest++ = '0';
+
+		CopyMemory(p_dest, pHexNumberStart, pHexNumberEnd-pHexNumberStart);
+		p_dest += pHexNumberEnd-pHexNumberStart;
+
+		p = pHexNumberEnd;
+	}
+
+	// Copy the rest
+	lstrcpy(p_dest, p);
+
+	*ppFixedCommand = pNewCommand;
+	return 1;
+}
+
+static char *SkipCommandName(char *p)
+{
+	char *pPrefix;
+	int i;
+
+	switch(*p)
+	{
+	case 'L':
+	case 'l':
+		pPrefix = "LOCK";
+
+		for(i=1; pPrefix[i] != '\0'; i++)
+		{
+			if(p[i] != pPrefix[i] && p[i] != pPrefix[i]-'A'+'a')
+				break;
+		}
+
+		if(pPrefix[i] == '\0')
+		{
+			if((p[i] < 'A' || p[i] > 'Z') && (p[i] < 'a' || p[i] > 'z') && (p[i] < '0' || p[i] > '9'))
+			{
+				p += i;
+				while(*p == ' ' || *p == '\t')
+					p++;
+			}
+		}
+		break;
+
+	case 'R':
+	case 'r':
+		pPrefix = "REP";
+
+		for(i=1; pPrefix[i] != '\0'; i++)
+		{
+			if(p[i] != pPrefix[i] && p[i] != pPrefix[i]-'A'+'a')
+				break;
+		}
+
+		if(pPrefix[i] == '\0')
+		{
+			if((p[i] == 'N' || p[i] == 'n') && (p[i+1] == 'E' || p[i+1] == 'e' || p[i+1] == 'Z' || p[i+1] == 'z'))
+				i += 2;
+			else if(p[i] == 'E' || p[i] == 'e' || p[i] == 'Z' || p[i] == 'z')
+				i++;
+
+			if((p[i] < 'A' || p[i] > 'Z') && (p[i] < 'a' || p[i] > 'z') && (p[i] < '0' || p[i] > '9'))
+			{
+				p += i;
+				while(*p == ' ' || *p == '\t')
+					p++;
+			}
+		}
+		break;
+	}
+
+	while((*p >= 'A' && *p <= 'Z') || (*p >= 'a' && *p <= 'z') || (*p >= '0' && *p <= '9'))
+		p++;
+
+	while(*p == ' ' || *p == '\t')
+		p++;
+
+	return p;
+}
+
+static int FixedAsmCorrectErrorSpot(char *lpCommand, char *pFixedCommand, int result)
+{
+	char *p;
+	char *pHexNumberStart;
+
+	// Skip the command name
+	p = SkipCommandName(lpCommand);
+
+	if(-result < p-lpCommand)
+		return result;
+
+	// Search for hex numbers starting with a letter
+	while(FindNextHexNumberStartingWithALetter(p, &pHexNumberStart, &p))
+	{
+		if(-result < pHexNumberStart+1-lpCommand)
+			return result;
+
+		result++;
+
+		if(-result < p-lpCommand)
+			return result;
+	}
+
+	return result;
+}
+
+static BOOL FindNextHexNumberStartingWithALetter(char *lpCommand, char **ppHexNumberStart, char **ppHexNumberEnd)
+{
+	char *p;
+	char *pHexNumberStart;
+
+	p = lpCommand;
+
+	while(*p != '\0' && *p != ';')
+	{
+		if((*p >= 'A' && *p <= 'Z') || (*p >= 'a' && *p <= 'z') || (*p >= '0' && *p <= '9'))
+		{
+			if((*p >= 'A' && *p <= 'F') || (*p >= 'a' && *p <= 'f'))
+			{
+				pHexNumberStart = p;
+
+				do {
+					p++;
+				} while((*p >= '0' && *p <= '9') || (*p >= 'A' && *p <= 'F') || (*p >= 'a' && *p <= 'f'));
+
+				if(*p == 'h' || *p == 'H')
+				{
+					// Check registers AH, BH, CH, DH
+					if(
+						p-pHexNumberStart != 1 || 
+						((p[-1] < 'A' || p[-1] > 'D') && (p[-1] < 'a' || p[-1] > 'd'))
+					)
+						p++;
+				}
+
+				if((*p >= 'A' && *p <= 'Z') || (*p >= 'a' && *p <= 'z') || (*p >= '0' && *p <= '9'))
+				{
+					do {
+						p++;
+					} while((*p >= 'A' && *p <= 'Z') || (*p >= 'a' && *p <= 'z') || (*p >= '0' && *p <= '9'));
+				}
+				else
+				{
+					*ppHexNumberStart = pHexNumberStart;
+					*ppHexNumberEnd = p;
+					return TRUE;
+				}
+			}
+			else
+			{
+				do {
+					p++;
+				} while((*p >= 'A' && *p <= 'Z') || (*p >= 'a' && *p <= 'z') || (*p >= '0' && *p <= '9'));
+			}
+		}
+		else
+			p++;
+	}
+
+	return FALSE;
+}
+
+// Memory functions
+
+BOOL SimpleReadMemory(void *buf, DWORD_PTR addr, SIZE_T size)
+{
+	return Readmemory(buf, addr, size, MM_RESTORE|MM_SILENT) != 0;
+}
+
+BOOL SimpleWriteMemory(void *buf, DWORD_PTR addr, SIZE_T size)
+{
+	return Writememory(buf, addr, size, MM_RESTORE|MM_DELANAL|MM_SILENT) != 0;
+}
+
+// Symbolic functions
+
+int GetLabel(DWORD_PTR addr, TCHAR *name)
+{
+	return Findsymbolicname(addr, name);
+}
+
+int GetComment(DWORD_PTR addr, TCHAR *name)
+{
+	return Findname(addr, NM_COMMENT, name);
+}
+
+static void ConvertUtf8ToAnsi(const char *szUtf8, char *szAnsi, int nMaxLen)
+{
+	if (!szUtf8 || !szAnsi || nMaxLen <= 0) return;
+	
+	int nWideLen = MultiByteToWideChar(CP_UTF8, 0, szUtf8, -1, NULL, 0);
+	if (nWideLen <= 0)
+	{
+		lstrcpynA(szAnsi, szUtf8, nMaxLen);
+		return;
+	}
+	
+	wchar_t *wszBuf = (wchar_t *)HeapAlloc(GetProcessHeap(), 0, nWideLen * sizeof(wchar_t));
+	if (!wszBuf)
+	{
+		lstrcpynA(szAnsi, szUtf8, nMaxLen);
+		return;
+	}
+	
+	MultiByteToWideChar(CP_UTF8, 0, szUtf8, -1, wszBuf, nWideLen);
+	
+	WideCharToMultiByte(CP_ACP, 0, wszBuf, -1, szAnsi, nMaxLen, NULL, NULL);
+	
+	HeapFree(GetProcessHeap(), 0, wszBuf);
+}
+
+BOOL QuickInsertLabel(DWORD_PTR addr, TCHAR *s)
+{
+	char szAnsi[1024];
+	ConvertUtf8ToAnsi(s, szAnsi, 1024);
+	return Quickinsertname(addr, NM_LABEL, szAnsi) != -1;
+}
+
+BOOL QuickInsertComment(DWORD_PTR addr, TCHAR *s)
+{
+	char szAnsi[2048];
+	ConvertUtf8ToAnsi(s, szAnsi, 2048);
+	return Quickinsertname(addr, NM_COMMENT, szAnsi) != -1;
+}
+
+void MergeQuickData(void)
+{
+	Mergequicknames();
+}
+
+void DeleteRangeLabels(DWORD_PTR addr0, DWORD_PTR addr1)
+{
+	Deletenamerange(addr0, addr1, NM_LABEL);
+}
+
+void DeleteRangeComments(DWORD_PTR addr0, DWORD_PTR addr1)
+{
+	Deletenamerange(addr0, addr1, NM_COMMENT);
+}
+
+// Module functions
+
+PLUGIN_MODULE FindModuleByName(TCHAR *lpModule)
+{
+	int module_len;
+	t_table *table;
+	t_sorted *sorted;
+	int n, itemsize;
+	t_module *module;
+	char c1, c2;
+	int i, j;
+
+	module_len = lstrlen(lpModule);
+	if(module_len > SHORTLEN)
+		return NULL;
+
+	table = (t_table *)Plugingetvalue(VAL_MODULES);
+	sorted = &table->data;
+
+	n = sorted->n;
+	itemsize = sorted->itemsize;
+	module = (t_module *)sorted->data;
+
+	for(i = 0; i < n; i++)
+	{
+		for(j = 0; j < module_len; j++)
+		{
+			c1 = lpModule[j];
+			if(c1 >= 'a' && c1 <= 'z')
+				c1 += -'a' + 'A';
+
+			c2 = module->name[j];
+			if(c2 >= 'a' && c2 <= 'z')
+				c2 += -'a' + 'A';
+
+			if(c1 != c2)
+				break;
+		}
+
+		if(j == module_len && (j == SHORTLEN || module->name[j] == '\0'))
+			return module;
+
+		module = (t_module *)((char *)module + itemsize);
+	}
+
+	return NULL;
+}
+
+// Module functions
+
+PLUGIN_MODULE FindModuleByAddr(DWORD_PTR dwAddress)
+{
+	return Findmodule(dwAddress);
+}
+
+DWORD_PTR GetModuleBase(PLUGIN_MODULE module)
+{
+	return module->base;
+}
+
+SIZE_T GetModuleSize(PLUGIN_MODULE module)
+{
+	return module->size;
+}
+
+BOOL GetModuleName(PLUGIN_MODULE module, TCHAR *pszModuleName)
+{
+	CopyMemory(pszModuleName, module->name, (MODULE_MAX_LEN-1)*sizeof(TCHAR));
+	pszModuleName[MODULE_MAX_LEN-1] = _T('\0');
+	return TRUE;
+}
+
+BOOL IsModuleWithRelocations(PLUGIN_MODULE module)
+{
+	return module->reloctable != 0;
+}
+
+// Memory functions
+
+PLUGIN_MEMORY FindMemory(DWORD_PTR dwAddress)
+{
+	return Findmemory(dwAddress);
+}
+
+DWORD_PTR GetMemoryBase(PLUGIN_MEMORY mem)
+{
+	return mem->base;
+}
+
+SIZE_T GetMemorySize(PLUGIN_MEMORY mem)
+{
+	return mem->size;
+}
+
+void EnsureMemoryBackup(PLUGIN_MEMORY mem)
+{
+	t_dump dump;
+
+	if(!mem->copy)
+	{
+		// what a hack -_-'
+		dump.base = mem->base;
+		dump.size = mem->size;
+		dump.threadid = 1;
+		dump.filecopy = NULL;
+		dump.backup = NULL;
+
+		Dumpbackup(&dump, BKUP_CREATE);
+	}
+}
+
+// Analysis functions
+
+BYTE *FindDecode(DWORD_PTR addr, SIZE_T *psize)
+{
+	return Finddecode(addr, psize);
+}
+
+int DecodeGetType(BYTE decode)
+{
+	switch(decode & DEC_TYPEMASK)
+	{
+	// Unknown
+	case DEC_UNKNOWN:
+	default:
+		return DECODE_UNKNOWN;
+
+	// Supported data
+	case DEC_BYTE:
+	case DEC_WORD:
+	case DEC_DWORD:
+	case DEC_BYTESW:
+		return DECODE_DATA;
+
+	// Command
+	case DEC_COMMAND:
+	case DEC_JMPDEST:
+	case DEC_CALLDEST:
+		return DECODE_COMMAND;
+
+	// Ascii
+	case DEC_STRING:
+		return DECODE_ASCII;
+
+	// Unicode
+	case DEC_UNICODE:
+		return DECODE_UNICODE;
+	}
+}
+
+// Misc.
+
+BOOL IsProcessLoaded()
+{
+	return Getstatus() != STAT_NONE;
+}
+
+void SuspendAllThreads()
+{
+	// Note: I'm not sure it's required to be implemented here
+	// It's recommended to call for OllyDbg v2, though
+}
+
+void ResumeAllThreads()
+{
+	// Note: I'm not sure it's required to be implemented here
+	// It's recommended to call for OllyDbg v2, though
+}
+
+DWORD_PTR GetCpuBaseAddr()
+{
+	t_dump *td = (t_dump *)Plugingetvalue(VAL_CPUDASM);
+	if(!td)
+		return 0;
+
+	return td->base;
+}
+
+void InvalidateGui()
+{
+	// Not needed
+}
+
+// New Color conversion helpers to support user-friendly RGB (0xRRGGBB) format in multiasm.ini
+// while automatically mapping to/from Windows BGR (0xssBBGGRR) with style bits preserved.
+
+BOOL MyGetColorfromini(HINSTANCE dllinst, TCHAR *key, int *p_val, int def)
+{
+	int val = 0;
+	// Use min=0, max=0 (range restriction disabled) to safely read style-bit-enabled bold colors (like 0x01FF6E6E)
+	BOOL ret = MyGetintfromini(dllinst, key, &val, 0, 0, def);
+	if (ret)
+	{
+		BYTE style = (BYTE)((val >> 24) & 0xFF);
+		BYTE r = (BYTE)((val >> 16) & 0xFF);
+		BYTE g = (BYTE)((val >> 8) & 0xFF);
+		BYTE b = (BYTE)(val & 0xFF);
+		*p_val = (int)(((DWORD)style << 24) | RGB(r, g, b));
+	}
+	else
+	{
+		*p_val = def;
+	}
+	return ret;
+}
+
+BOOL MyWriteColortoini(HINSTANCE dllinst, TCHAR *key, int val)
+{
+	BYTE style = (BYTE)((val >> 24) & 0xFF);
+	BYTE r = GetRValue((COLORREF)val);
+	BYTE g = GetGValue((COLORREF)val);
+	BYTE b = GetBValue((COLORREF)val);
+	int rgbVal = ((int)style << 24) | (r << 16) | (g << 8) | b;
+	return MyWriteinttoini(dllinst, key, rgbVal);
+}
+
+void ShowStatus(const TCHAR *msg)
+{
+#ifdef UNICODE
+	char szAnsi[1024];
+	WideCharToMultiByte(CP_ACP, 0, msg, -1, szAnsi, 1024, NULL, NULL);
+	Flash(szAnsi);
+#else
+	Flash((char *)msg);
+#endif
+}

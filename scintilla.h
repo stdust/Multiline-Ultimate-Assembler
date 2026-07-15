@@ -1,0 +1,168 @@
+#ifndef _SCINTILLA_V9_H_
+#define _SCINTILLA_V9_H_
+
+// Scintilla 기본 상수 및 메시지
+#define INVALID_POSITION -1
+#define SCI_START 2000
+#define SCI_OPTIONAL_START 3000
+#define SCI_LEXER_START 4000
+
+#define SCI_ADDTEXT 2001
+#define SCI_INSERTTEXT 2003
+#define SCI_CLEARALL 2004
+#define SCI_CLEARDOCUMENTSTYLE 2005
+#define SCI_GETLENGTH 2006
+#define SCI_GETCHARAT 2007
+#define SCI_GETCURRENTPOS 2008
+#define SCI_GETANCHOR 2009
+#define SCI_GETSTYLEAT 2010
+#define SCI_UNDO 2176
+#define SCI_REDO 2011
+#define SCI_CANUNDO 2174
+#define SCI_CANREDO 2016
+#define SCI_SETUNDOCOLLECTION 2012
+#define SCI_SELECTALL 2013
+#define SCI_SETSAVEPOINT 2014
+#define SCI_GETSTYLEDTEXT 2015
+#define SCI_MARKERGET 2017
+#define SCI_MARKERDEFINE 2040
+#define SCI_MARKERSETFORE 2041
+#define SCI_MARKERSETBACK 2042
+#define SCI_MARKERADD 2043
+#define SCI_MARKERDELETE 2044
+#define SCI_MARKERDELETEALL 2045
+#define SCI_MARKERSETALPHA 2476
+
+// Corrected Style Message Constants (Standard Scintilla Specification)
+#define SCI_STYLECLEARALL 2050
+#define SCI_STYLESETFORE 2051
+#define SCI_STYLESETBACK 2052
+#define SCI_STYLESETBOLD 2053
+#define SCI_STYLESETITALIC 2054
+#define SCI_STYLESETSIZE 2055
+#define SCI_STYLESETFONT 2056
+#define SCI_STYLESETEOLFILLED 2057
+#define SCI_STYLERESETDEFAULT 2058
+#define SCI_STYLESETUNDERLINE 2059
+
+#define SCI_SETSEL 2160
+#define SCI_GETSELTEXT 2161
+#define SCI_GETTEXT 2182
+#define SCI_SETTEXT 2181
+#define SCI_GETTEXTLENGTH 2183
+
+#define SCI_SETKEYWORDS 4005
+#define SCI_SETLEXER 4001
+#define SCI_SETLEXERLANGUAGE 4006
+#define SCI_LOADLEXERLIBRARY 4007
+#define SCI_COLOURISE 4003
+#define SCI_SETPROPERTY 3002
+
+#define SCLEX_CONTAINER 0
+#define SCLEX_NULL 1
+#define SCLEX_ASM 34
+
+// Indicator related
+#define SCI_INDICSETSTYLE 2080
+#define SCI_INDICSETFORE 2082
+#define SCI_INDICSETUNDER 2510
+#define SCI_INDICATORFILLRANGE 2504
+#define SCI_INDICATORCLEARRANGE 2505
+#define SCI_INDICSETALPHA 2523
+#define SCI_INDICSETOUTLINEALPHA 2558
+#define SCI_SETINDICATORCURRENT 2500
+
+#define INDIC_PLAIN 0
+#define INDIC_SQUIGGLE 1
+#define INDIC_TT 2
+#define INDIC_DIAGONAL 3
+#define INDIC_STRIKE 4
+#define INDIC_HIDDEN 5
+#define INDIC_ROUNDBOX 6
+#define INDIC_STRAIGHTBOX 8
+#define INDIC_DASH 9
+#define INDIC_DOTS 10
+#define INDIC_SQUIGGLELOW 11
+#define INDIC_DOTBOX 12
+#define INDIC_TEXTFORE 17
+
+// 스타일 정의 (어셈블리 Lexer용)
+#define SCE_ASM_DEFAULT 0
+#define SCE_ASM_COMMENT 1
+#define SCE_ASM_NUMBER 2
+#define SCE_ASM_STRING 3
+#define SCE_ASM_OPERATOR 4
+#define SCE_ASM_IDENTIFIER 5
+#define SCE_ASM_CPUINSTRUCTION 6
+#define SCE_ASM_MATHINSTRUCTION 7
+#define SCE_ASM_REGISTER 8
+#define SCE_ASM_DIRECTIVE 9
+#define SCE_ASM_DIRECTIVEOPERAND 10
+#define SCE_ASM_CHARACTER 11
+#define SCE_ASM_UUID 12
+#define SCE_ASM_EXTINSTRUCTION 14
+
+// Standard style numbers
+#define STYLE_DEFAULT 32
+#define STYLE_LINENUMBER 33
+
+// 여백(Margin) 관련 추가
+#define SCI_SETMARGINTYPEN 2240
+#define SCI_SETMARGINWIDTHN 2242
+
+// 편집 및 검색 기능 추가
+#define SCI_FINDTEXT 2150
+#define SCI_REPLACESEL 2175
+
+// Scintilla notifications and constants
+#define SCN_CHARADDED 2001
+#define SCN_MODIFIED 2008
+#define SCN_UPDATEUI 2007
+
+// 추가적인 Scintilla 메시지 (가장 유용하게 사용)
+#define SCI_GETSELECTIONSTART 2143
+#define SCI_GETSELECTIONEND 2144
+#define SCI_GETLINECOUNT 2154
+#define SCI_GETLINE 2153
+#define SCI_LINEFROMPOSITION 2166
+#define SCI_POSITIONFROMLINE 2167
+#define SCI_GETLINEENDPOSITION 2136
+#define SCI_SETTABWIDTH 2036
+#define SCI_GOTOLINE 2024
+#define SCI_SCROLLCARET 2169
+
+// New Undo / Deletion Message Constants
+#define SCI_BEGINUNDOACTION 2070
+#define SCI_ENDUNDOACTION 2071
+#define SCI_DELETERANGE 2645
+
+#ifndef NMHDR
+typedef struct Sci_NotifyHeader {
+    HWND hwndFrom;
+    UINT_PTR idFrom;
+    UINT code;
+} Sci_NotifyHeader;
+#endif
+
+typedef struct SCNotification {
+    Sci_NotifyHeader nmhdr;
+    int position;
+    int ch;
+    int modifiers;
+    int modificationType;
+    const char *text;
+    int length;
+    int linesAdded;
+    int message;
+    LPARAM wParam;
+    LPARAM lParam;
+    int line;
+    int foldLevelNow;
+    int foldLevelPrev;
+    int margin;
+    int listType;
+    int x;
+    int y;
+} SCNotification;
+
+#endif // _SCINTILLA_V9_H_

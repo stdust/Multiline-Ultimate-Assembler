@@ -1,0 +1,399 @@
+#include "stdafx.h"
+#include "plugin.h"
+#include "x64dbg_pluginsdk/bridgemain.h"
+
+HWND hwollymain;
+
+// Config functions using standard Windows API to read/write custom multiasm.ini directly
+
+static void GetIniFilePath(HINSTANCE dllinst, TCHAR *pszIniPath)
+{
+	GetModuleFileName(dllinst, pszIniPath, MAX_PATH);
+	TCHAR *p = _tcsrchr(pszIniPath, _T('\\'));
+	if (p) {
+		_tcscpy(p + 1, _T("multiasm.ini"));
+	} else {
+		_tcscpy(pszIniPath, _T("multiasm.ini"));
+	}
+}
+
+BOOL MyGetintfromini(HINSTANCE dllinst, TCHAR *key, int *p_val, int min, int max, int def)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	TCHAR szBuffer[64];
+	GetPrivateProfileString(_T("Multiline Ultimate Assembler"), key, _T(""), szBuffer, 64, szIniPath);
+
+	if (szBuffer[0] == _T('\0'))
+	{
+		*p_val = def;
+		return FALSE;
+	}
+
+	int val = (int)_tcstoul(szBuffer, NULL, 0);
+
+	if (min && max && (val < min || val > max))
+		*p_val = def;
+	else
+		*p_val = val;
+
+	return TRUE;
+}
+
+BOOL MyWriteinttoini(HINSTANCE dllinst, TCHAR *key, int val)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	TCHAR szBuffer[64];
+	wsprintf(szBuffer, val > 65535 ? _T("0x%08X") : _T("%d"), val);
+
+	return WritePrivateProfileString(_T("Multiline Ultimate Assembler"), key, szBuffer, szIniPath) != 0;
+}
+
+int MyGetstringfromini(HINSTANCE dllinst, TCHAR *key, TCHAR *s, int length)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	return (int)GetPrivateProfileString(_T("Multiline Ultimate Assembler"), key, _T(""), s, length, szIniPath);
+}
+
+BOOL MyWritestringtoini(HINSTANCE dllinst, TCHAR *key, TCHAR *s)
+{
+	TCHAR szIniPath[MAX_PATH];
+	GetIniFilePath(dllinst, szIniPath);
+
+	return WritePrivateProfileString(_T("Multiline Ultimate Assembler"), key, s, szIniPath) != 0;
+}
+
+// Assembler functions
+
+DWORD SimpleDisasm(BYTE *cmd, SIZE_T cmdsize, DWORD_PTR ip, BYTE *dec, BOOL bSizeOnly,
+	TCHAR *pszResult, DWORD_PTR *jmpconst, DWORD_PTR *adrconst, DWORD_PTR *immconst)
+{
+	BYTE cmd_safe[MAXCMDSIZE];
+	if(cmdsize < MAXCMDSIZE)
+	{
+		CopyMemory(cmd_safe, cmd, cmdsize);
+		ZeroMemory(cmd_safe + cmdsize, MAXCMDSIZE - cmdsize);
+		cmd = cmd_safe;
+	}
+
+	BASIC_INSTRUCTION_INFO basicinfo;
+	if(!DbgFunctions()->DisasmFast(cmd, ip, &basicinfo))
+		return 0;
+
+	if(!bSizeOnly)
+	{
+		if(basicinfo.type == TYPE_ADDR &&
+			basicinfo.branch &&
+			!basicinfo.call &&
+			basicinfo.size == 2)
+		{
+			// Add "short" for a short jump
+
+			// We add 6 chars, make sure that basicinfo.instruction is not too long
+			basicinfo.instruction[COMMAND_MAX_LEN - 1 - 6] = '\0';
+
+			BOOL bUppercase = (basicinfo.instruction[0] >= 'A' && basicinfo.instruction[0] <= 'Z');
+
+			char *p = basicinfo.instruction;
+			char *q = pszResult;
+
+			// Copy command name
+			while(*p != '\0' && *p != ' ' && *p != '\t')
+			{
+				*q++ = *p++;
+			}
+
+			// Copy spaces
+			while(*p == ' ' || *p == '\t')
+			{
+				*q++ = *p++;
+			}
+
+			if(*p != '\0')
+			{
+				// Add "short "
+				lstrcpy(q, bUppercase ? "SHORT " : "short ");
+				q += 6;
+			}
+
+			// Copy the rest
+			lstrcpy(q, p);
+		}
+		else
+		{
+			// pszResult should have at least COMMAND_MAX_LEN chars
+			lstrcpy(pszResult, basicinfo.instruction);
+		}
+
+		*jmpconst = basicinfo.addr;
+		*adrconst = basicinfo.memory.value;
+		*immconst = basicinfo.value.value;
+	}
+
+	return basicinfo.size;
+}
+
+int AssembleShortest(TCHAR *lpCommand, DWORD_PTR dwAddress, BYTE *bBuffer, TCHAR *lpError)
+{
+	int size;
+	if(!DbgFunctions()->Assemble(dwAddress, bBuffer, &size, lpCommand, lpError))
+		return 0;
+
+	return size;
+}
+
+int AssembleWithGivenSize(TCHAR *lpCommand, DWORD_PTR dwAddress, int nReqSize, BYTE *bBuffer, TCHAR *lpError)
+{
+	int size;
+	if(!DbgFunctions()->Assemble(dwAddress, bBuffer, &size, lpCommand, lpError))
+		return 0;
+
+	// TODO: fix when implemented
+	if(size > nReqSize)
+	{
+		lstrcpy(lpError, "AssembleWithGivenSize: internal assembler error");
+		return 0;
+	}
+
+	while(size < nReqSize)
+		bBuffer[size++] = 0x90; // Fill with NOPs
+
+	return size;
+}
+
+// Memory functions
+
+BOOL SimpleReadMemory(void *buf, DWORD_PTR addr, SIZE_T size)
+{
+	return DbgMemRead(addr, buf, size);
+}
+
+BOOL SimpleWriteMemory(void *buf, DWORD_PTR addr, SIZE_T size)
+{
+	return DbgFunctions()->MemPatch(addr, buf, size);
+}
+
+// Symbolic functions
+
+int GetLabel(DWORD_PTR addr, TCHAR *name)
+{
+	if(!DbgGetLabelAt(addr, SEG_DEFAULT, name))
+		return 0;
+
+	return lstrlen(name);
+}
+
+int GetComment(DWORD_PTR addr, TCHAR *name)
+{
+	if(!DbgGetCommentAt(addr, name))
+		return 0;
+
+	if(name[0] == '\1') // Automatic comment
+		return 0;
+
+	return lstrlen(name);
+}
+
+BOOL QuickInsertLabel(DWORD_PTR addr, TCHAR *s)
+{
+	return DbgSetLabelAt(addr, s);
+}
+
+BOOL QuickInsertComment(DWORD_PTR addr, TCHAR *s)
+{
+	return DbgSetCommentAt(addr, s);
+}
+
+void MergeQuickData(void)
+{
+}
+
+void DeleteRangeLabels(DWORD_PTR addr0, DWORD_PTR addr1)
+{
+	DbgClearLabelRange(addr0, addr1);
+}
+
+void DeleteRangeComments(DWORD_PTR addr0, DWORD_PTR addr1)
+{
+	DbgClearCommentRange(addr0, addr1);
+}
+
+// Module functions
+
+PLUGIN_MODULE FindModuleByName(TCHAR *lpModule)
+{
+	return (PLUGIN_MODULE)DbgFunctions()->ModBaseFromName(lpModule);
+}
+
+PLUGIN_MODULE FindModuleByAddr(DWORD_PTR dwAddress)
+{
+	return (PLUGIN_MODULE)DbgFunctions()->ModBaseFromAddr(dwAddress);
+}
+
+DWORD_PTR GetModuleBase(PLUGIN_MODULE module)
+{
+	return (DWORD_PTR)module;
+}
+
+SIZE_T GetModuleSize(PLUGIN_MODULE module)
+{
+	return DbgFunctions()->ModSizeFromAddr((duint)module);
+}
+
+BOOL GetModuleName(PLUGIN_MODULE module, TCHAR *pszModuleName)
+{
+	return DbgFunctions()->ModNameFromAddr((duint)module, pszModuleName, FALSE);
+}
+
+BOOL IsModuleWithRelocations(PLUGIN_MODULE module)
+{
+	IMAGE_DOS_HEADER *pDosHeader = (IMAGE_DOS_HEADER *)module;
+
+	LONG e_lfanew;
+	if(!DbgMemRead(
+		(ULONG_PTR)&pDosHeader->e_lfanew,
+		(BYTE *)&e_lfanew,
+		sizeof(LONG)))
+	{
+		return FALSE;
+	}
+
+	IMAGE_NT_HEADERS *pNtHeader = (IMAGE_NT_HEADERS *)((char *)pDosHeader + e_lfanew);
+
+	DWORD dwRelocVirtualAddress;
+	if(!DbgMemRead(
+		(ULONG_PTR)&pNtHeader->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_BASERELOC].VirtualAddress,
+		(BYTE *)&dwRelocVirtualAddress,
+		sizeof(DWORD)))
+	{
+		return FALSE;
+	}
+
+	return dwRelocVirtualAddress != 0;
+}
+
+// Memory functions
+
+PLUGIN_MEMORY FindMemory(DWORD_PTR dwAddress)
+{
+	return (PLUGIN_MEMORY)DbgMemFindBaseAddr(dwAddress, NULL);
+}
+
+DWORD_PTR GetMemoryBase(PLUGIN_MEMORY mem)
+{
+	return (DWORD_PTR)mem;
+}
+
+SIZE_T GetMemorySize(PLUGIN_MEMORY mem)
+{
+	SIZE_T size;
+	if(!DbgMemFindBaseAddr((duint)mem, &size))
+		return 0;
+
+	return size;
+}
+
+void EnsureMemoryBackup(PLUGIN_MEMORY mem)
+{
+}
+
+// Analysis functions
+
+BYTE *FindDecode(DWORD_PTR addr, SIZE_T *psize)
+{
+	// TODO: not implemented
+	return NULL;
+}
+
+int DecodeGetType(BYTE decode)
+{
+	// TODO: not implemented
+	return DECODE_UNKNOWN;
+}
+
+// Misc.
+
+BOOL IsProcessLoaded()
+{
+	return DbgIsDebugging();
+}
+
+void SuspendAllThreads()
+{
+	// Note: I'm not sure it's required to be implemented here
+	// It's recommended to call for OllyDbg v2, though
+
+	//ThreaderPauseAllThreads(false);
+}
+
+void ResumeAllThreads()
+{
+	// Note: I'm not sure it's required to be implemented here
+	// It's recommended to call for OllyDbg v2, though
+
+	//ThreaderResumeAllThreads(false);
+}
+
+DWORD_PTR GetCpuBaseAddr()
+{
+	SELECTIONDATA selection;
+
+	if(!GuiSelectionGet(GUI_DISASSEMBLY, &selection))
+		return 0;
+		
+	return DbgMemFindBaseAddr(selection.start, NULL);
+}
+
+void InvalidateGui()
+{
+	GuiUpdateAllViews();
+}
+
+// New Color conversion helpers to support user-friendly RGB (0xRRGGBB) format in multiasm.ini
+// while automatically mapping to/from Windows BGR (0xssBBGGRR) with style bits preserved.
+
+BOOL MyGetColorfromini(HINSTANCE dllinst, TCHAR *key, int *p_val, int def)
+{
+	int val = 0;
+	// Use min=0, max=0 (range restriction disabled) to safely read style-bit-enabled bold colors (like 0x01FF6E6E)
+	BOOL ret = MyGetintfromini(dllinst, key, &val, 0, 0, def);
+	if (ret)
+	{
+		BYTE style = (BYTE)((val >> 24) & 0xFF);
+		BYTE r = (BYTE)((val >> 16) & 0xFF);
+		BYTE g = (BYTE)((val >> 8) & 0xFF);
+		BYTE b = (BYTE)(val & 0xFF);
+		*p_val = (int)(((DWORD)style << 24) | RGB(r, g, b));
+	}
+	else
+	{
+		*p_val = def;
+	}
+	return ret;
+}
+
+BOOL MyWriteColortoini(HINSTANCE dllinst, TCHAR *key, int val)
+{
+	BYTE style = (BYTE)((val >> 24) & 0xFF);
+	BYTE r = GetRValue((COLORREF)val);
+	BYTE g = GetGValue((COLORREF)val);
+	BYTE b = GetBValue((COLORREF)val);
+	int rgbVal = ((int)style << 24) | (r << 16) | (g << 8) | b;
+	return MyWriteinttoini(dllinst, key, rgbVal);
+}
+
+void ShowStatus(const TCHAR *msg)
+{
+#ifdef UNICODE
+	char szAnsi[1024];
+	WideCharToMultiByte(CP_ACP, 0, msg, -1, szAnsi, 1024, NULL, NULL);
+	GuiAddStatusBarMessage(szAnsi);
+#else
+	GuiAddStatusBarMessage(msg);
+#endif
+}
