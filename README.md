@@ -33,7 +33,6 @@ multi/v8/
 │   └── Scintilla.dll      <- 64-bit Scintilla DLL (for x64dbg x64)
 ├── minicrt/               <- Minimal CRT Library
 ├── ollydbglib/            <- OllyDbg import libraries
-├── raeditlib/             <- Rich Edit Control libraries
 ├── x64dbg_pluginsdk/      <- x64dbg Plugin SDK
 ├── rsrc_files/            <- Resource icons & assets
 ├── MUltimate Assembler.sln
