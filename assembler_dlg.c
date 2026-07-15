@@ -1040,7 +1040,7 @@ static void SetScintillaDesign(HWND hWnd, HINSTANCE hInstance, RAFONT *praFont)
 		colorJmp = (COLORREF)val;
 		MyGetColorfromini(hInstance, _T("color_call"), &val, RGB(0, 130, 70));
 		colorCall = (COLORREF)val;
-		MyGetColorfromini(hInstance, _T("color_ret"), &val, RGB(130, 0, 180));
+		MyGetColorfromini(hInstance, _T("color_ret"), &val, RGB(0, 0, 0));
 		colorRet = (COLORREF)val;
 		MyGetColorfromini(hInstance, _T("color_nop"), &val, RGB(160, 160, 160));
 		colorNop = (COLORREF)val;
@@ -1059,7 +1059,7 @@ static void SetScintillaDesign(HWND hWnd, HINSTANCE hInstance, RAFONT *praFont)
 		colorJmpBg = (COLORREF)val;
 		MyGetColorfromini(hInstance, _T("color_call_bg"), &val, bckcol);
 		colorCallBg = (COLORREF)val;
-		MyGetColorfromini(hInstance, _T("color_ret_bg"), &val, bckcol);
+		MyGetColorfromini(hInstance, _T("color_ret_bg"), &val, RGB(121, 249, 121));
 		colorRetBg = (COLORREF)val;
 		MyGetColorfromini(hInstance, _T("color_nop_bg"), &val, bckcol);
 		colorNopBg = (COLORREF)val;
