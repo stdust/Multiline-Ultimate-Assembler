@@ -1,0 +1,41 @@
+# Visual Studio & C++ Build Artifacts
+.vs/
+*.user
+*.suo
+*.userosv
+*.sln.docstates
+*.aps
+*.ncb
+*.sdf
+*.opensdf
+*.db
+*.VC.db
+*.VC.opendb
+
+# Intermediate build directories
+Debug/
+Release/Release_odbg/
+Release/Release_x64dbg/
+x64/
+ipch/
+
+# Intermediate build files
+*.obj
+*.pch
+*.idb
+*.pdb
+*.tlog
+*.recipe
+*.iobj
+*.ipdb
+*.log
+*.FileListAbsolute.txt
+*.Build.CppClean.log
+*.lastbuildstate
+*.res
+
+# Temporary & backup files
+*.tmp
+*.bak
+*.swp
+*.zip

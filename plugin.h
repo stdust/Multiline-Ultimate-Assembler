@@ -22,6 +22,12 @@
 #define DECODE_UNICODE        4
 
 // Config functions
+//
+// MyGetintfromini() range semantics:
+//   The [min, max] range is validated only when min != max. Passing min == max
+//   (e.g. 0, 0) deliberately disables validation, which is what
+//   MyGetColorfromini() relies on in order to preserve the high style byte of
+//   colors such as 0x01FF6E6E.
 BOOL MyGetintfromini(HINSTANCE dllinst, TCHAR *key, int *p_val, int min, int max, int def);
 BOOL MyWriteinttoini(HINSTANCE dllinst, TCHAR *key, int val);
 int MyGetstringfromini(HINSTANCE dllinst, TCHAR *key, TCHAR *s, int length);

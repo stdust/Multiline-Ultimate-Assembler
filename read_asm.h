@@ -4,6 +4,11 @@
 #include "options_def.h"
 #include "plugin.h"
 
+// Maximum accepted length of a tab-name based label prefix
+// (options.disasm_labelgen == 2). Callers pass a buffer of exactly
+// LABEL_PREFIX_MAX_LEN TCHARs; CreateAndSetLabels() must never write past it.
+#define LABEL_PREFIX_MAX_LEN  32
+
 // linked list of commands
 
 typedef struct _disasm_cmd_node {

@@ -136,6 +136,10 @@
 #define SCI_ENDUNDOACTION 2071
 #define SCI_DELETERANGE 2645
 
+// Undo buffer control. Needed so that switching tabs does not leave the
+// previous tab's text reachable through Ctrl+Z in the new tab.
+#define SCI_EMPTYUNDOBUFFER 2175
+
 #ifndef NMHDR
 typedef struct Sci_NotifyHeader {
     HWND hwndFrom;

@@ -38,4 +38,11 @@ typedef struct {
 	COLORREF color_call_line_bg;
 } OPTIONS;
 
+// Number of entries in the IDC_DISASM_HEX / IDC_DISASM_LABELGEN /
+// IDC_EDIT_TABWIDTH combo boxes. Kept here so that the ini loader
+// (main_common.c) and the options dialog (options_dlg.c) cannot drift apart.
+#define OPT_DISASM_HEX_MAX       4
+#define OPT_DISASM_LABELGEN_MAX  2
+#define OPT_EDIT_TABWIDTH_MAX    2
+
 #endif // _OPTIONS_DEF_V4_H_

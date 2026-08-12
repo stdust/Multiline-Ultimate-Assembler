@@ -4,6 +4,14 @@
 #include "options_def.h"
 #include "plugin.h"
 
+// Maximum length (including the terminating NUL) of a code cave name,
+// i.e. the identifier in <codecave:name>.
+#define CAVE_NAME_MAX_LEN     64
+
+// The literal prefix accepted by <codecave:name>
+#define CAVE_NAME_PREFIX      _T("codecave:")
+#define CAVE_NAME_PREFIX_LEN  (ARRAYSIZE(CAVE_NAME_PREFIX) - 1)
+
 // linked list of labels
 
 typedef struct _label_node {
@@ -54,7 +62,7 @@ typedef struct _cmd_block_node {
 	CMD_HEAD cmd_head;
 	ANON_LABEL_HEAD anon_label_head;
 	BOOL bIsCodeCave;
-	TCHAR szCaveName[64];
+	TCHAR szCaveName[CAVE_NAME_MAX_LEN];
 	DWORD_PTR dwEndAddress;
 } CMD_BLOCK_NODE;
 
@@ -81,6 +89,7 @@ static LONG_PTR SpecialCommandToData(CMD_BLOCK_NODE *cmd_block_node, DWORD_PTR *
 static LONG_PTR CommandToData(CMD_BLOCK_NODE *cmd_block_node, DWORD_PTR *pdwAddress, DWORD_PTR dwBaseAddress, TCHAR *lpText, TCHAR *lpError);
 
 static BOOL IsInComment(TCHAR *pchCommentChar, TCHAR *lpText, TCHAR *lpError);
+static BOOL IsCaveNamePrefix(const TCHAR *p);
 static LONG_PTR ParseAddress(TCHAR *lpText, DWORD_PTR *pdwAddress, DWORD_PTR *pdwEndAddress, DWORD_PTR *pdwBaseAddress, BOOL *pbIsCodeCave, TCHAR *pszCaveName, TCHAR *lpError);
 static BOOL NewCmdBlock(CMD_BLOCK_HEAD *p_cmd_block_head, DWORD_PTR dwAddress, BOOL bIsCodeCave, TCHAR *pszCaveName, TCHAR *lpError);
 static LONG_PTR ParseAnonLabel(TCHAR *lpText, DWORD_PTR dwAddress, ANON_LABEL_HEAD *p_anon_label_head, TCHAR *lpError);

@@ -88,9 +88,6 @@ DLL_EXPORT bool pluginit(PLUG_INITSTRUCT* initStruct)
 	_plugin_registercommand(pluginHandle, "multiasm_disasm_selection", CmdDisasmSelection, true);
 	_plugin_registercommand(pluginHandle, "multiasm_close", CmdClose, false);
 
-	// Automatically show the dialog on load for testing
-	// GuiExecuteOnGuiThread(AssemblerShowDlg);
-
 	return true;
 }
 
@@ -104,7 +101,6 @@ static int GetPluginVersion()
 		char c = *p;
 		if(c >= '0' && c <= '9')
 		{
-		_plugin_logputs("");
 			nVersion *= 10;
 			nVersion += c - '0';
 		}
@@ -191,7 +187,9 @@ static bool CmdShow(int argc, char** argv)
 		return false;
 	}
 
-	// GuiExecuteOnGuiThread(AssemblerShowDlg);
+	// The dialog must be created on the GUI thread, commands run on the
+	// command thread.
+	GuiExecuteOnGuiThread(AssemblerShowDlg);
 	return true;
 }
 

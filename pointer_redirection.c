@@ -5,8 +5,11 @@ static void PatchPtr(void **ppAddress, void *pPtr)
 {
 	DWORD dwOldProtect, dwOtherProtect;
 
-	VirtualProtect(ppAddress, sizeof(void *), PAGE_EXECUTE_READWRITE, &dwOldProtect);
+	if(!VirtualProtect(ppAddress, sizeof(void *), PAGE_EXECUTE_READWRITE, &dwOldProtect))
+		return;
+
 	*ppAddress = pPtr;
+
 	VirtualProtect(ppAddress, sizeof(void *), dwOldProtect, &dwOtherProtect);
 }
 

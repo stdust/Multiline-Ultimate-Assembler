@@ -13,13 +13,19 @@ void **FindImportPtr(HMODULE hFindInModule, char *pModuleName, char *pImportName
 
 	// Init
 	pDosHeader = (IMAGE_DOS_HEADER *)hFindInModule;
-	pNtHeader = (IMAGE_NT_HEADERS *)((char *)pDosHeader + pDosHeader->e_lfanew);
+	if(!pDosHeader || pDosHeader->e_magic != IMAGE_DOS_SIGNATURE)
+		return NULL;
 
-	if(!pNtHeader->OptionalHeader.DataDirectory[1].VirtualAddress)
+	pNtHeader = (IMAGE_NT_HEADERS *)((char *)pDosHeader + pDosHeader->e_lfanew);
+	if(pNtHeader->Signature != IMAGE_NT_SIGNATURE)
+		return NULL;
+
+	if(!pNtHeader->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress)
 		return NULL;
 
 	ImageBase = (ULONG_PTR)hFindInModule;
-	pImportDescriptor = (IMAGE_IMPORT_DESCRIPTOR *)(ImageBase + pNtHeader->OptionalHeader.DataDirectory[1].VirtualAddress);
+	pImportDescriptor = (IMAGE_IMPORT_DESCRIPTOR *)(ImageBase +
+		pNtHeader->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress);
 
 	// Search!
 	while(pImportDescriptor->OriginalFirstThunk)
