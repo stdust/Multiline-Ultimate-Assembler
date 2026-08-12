@@ -12,10 +12,9 @@
 *.VC.db
 *.VC.opendb
 
-# Intermediate build directories
+# Build directories
 Debug/
-Release/Release_odbg/
-Release/Release_x64dbg/
+Release/
 x64/
 ipch/
 
